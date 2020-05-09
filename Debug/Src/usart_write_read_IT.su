@@ -1,0 +1,7 @@
+usart_write_read_IT.c:26:6:delay	24	static
+usart_write_read_IT.c:40:6:GPIO_USART_Config	24	static
+usart_write_read_IT.c:70:6:USART1_Config	16	static
+usart_write_read_IT.c:88:6:GPIO_OnBoardLedBtn_Set	32	static
+usart_write_read_IT.c:113:6:USART1_IRQHandler	8	static
+usart_write_read_IT.c:119:5:main	424	static
+usart_write_read_IT.c:171:6:USART_ApplicationCallbackEvent	16	static

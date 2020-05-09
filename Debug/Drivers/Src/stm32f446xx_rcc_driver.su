@@ -1,0 +1,3 @@
+stm32f446xx_rcc_driver.c:29:10:RCC_GetPPLCLK	4	static
+stm32f446xx_rcc_driver.c:44:10:RCC_GetAPB1CLK	24	static
+stm32f446xx_rcc_driver.c:98:10:RCC_GetAPB2CLK	24	static
