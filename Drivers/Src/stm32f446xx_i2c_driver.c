@@ -704,11 +704,11 @@ void I2C_IRQConfig(uint8_t IRQNumber, uint8_t EnOrDi)
 {
 	if (EnOrDi == ENABLE)
 	{
-		NVIC_ISER->IER[IRQNumber / 32] = (1 << (IRQNumber % 32));
+		NVIC_ISER->IER[IRQNumber / 32] |= (1 << (IRQNumber % 32));
 	}
 	else if (EnOrDi == DISABLE)
 	{
-		NVIC_ICER->IER[IRQNumber / 32] = (1 << (IRQNumber % 32));
+		NVIC_ICER->IER[IRQNumber / 32] &= ~(1 << (IRQNumber % 32));
 	}
 }
 
@@ -725,7 +725,7 @@ void I2C_IRQConfig(uint8_t IRQNumber, uint8_t EnOrDi)
 void I2C_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority)
 {
 	uint8_t shift = 8 * (IRQNumber % 4) + NVIC_NONIMPL_LOW_BITS;
-	NVIC_IPR->IPR[IRQNumber / 4] = (IRQPriority << shift);
+	NVIC_IPR->IPR[IRQNumber / 4] |= (IRQPriority << shift);
 }
 
 

@@ -1,11 +1,12 @@
-Src/usart_write_read_IT.o: ../Src/usart_write_read_IT.c \
+Src/led_button.o: ../Src/led_button.c \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/Drivers/Inc/stm32f446xx.h \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/Drivers/Inc/stm32f446xx_rcc_driver.h \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/Drivers/Inc/stm32f446xx.h \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/Drivers/Inc/stm32f446xx_gpio_driver.h \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/Drivers/Inc/stm32f446xx_i2c_driver.h \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/Drivers/Inc/stm32f446xx_spi_driver.h \
- C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/Drivers/Inc/stm32f446xx_usart_driver.h
+ C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/Drivers/Inc/stm32f446xx_usart_driver.h \
+ C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/Drivers/Inc/stm32f446xx_gpio_driver.h
 
 C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/Drivers/Inc/stm32f446xx.h:
 
@@ -20,3 +21,5 @@ C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/D
 C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/Drivers/Inc/stm32f446xx_spi_driver.h:
 
 C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/Drivers/Inc/stm32f446xx_usart_driver.h:
+
+C:/Users/rahul/Desktop/Dev_Projects/Embedded/MCU1\ Course/Firmware/stm32f446xx/Drivers/Inc/stm32f446xx_gpio_driver.h:
