@@ -34,6 +34,8 @@
 #define NVIC_ICER0_BASEADDR		0xE000E180U
 #define NVIC_IPR0_BASEADDR		0xE000E400U
 
+#define NVIC_SYSTCK_BASEADDR	0xE000E010U
+
 #define NVIC_NONIMPL_LOW_BITS	4
 
 
@@ -136,8 +138,7 @@
 
 /************* PERIPHERAL REGISTER DEFINITION STRUCTURES **********/
 
-typedef struct
-{
+typedef struct {
 	__vo uint32_t MODER;			/* GPIO port mode register - OFFSET 0x00 */
 	__vo uint32_t OTYPER;			/* GPIO port output type register - OFFSET 0x04 */
 	__vo uint32_t OSPEEDR;			/* GPIO port output speed register - OFFSET 0x08 */
@@ -150,8 +151,7 @@ typedef struct
 } GPIO_RegDef_t;
 
 
-typedef struct
-{
+typedef struct {
 	__vo uint32_t CR1;				/* SPI control register 1 - OFFSET 0x00 */
 	__vo uint32_t CR2;				/* SPI control register 2 - OFFSET 0x04 */
 	__vo uint32_t SR;				/* SPI status register - OFFSET 0x08 */
@@ -163,8 +163,7 @@ typedef struct
 	__vo uint32_t I2SPR;			/* SPI_I2S prescaler register - OFFSET 0x20 */
 } SPI_RegDef_t;
 
-typedef struct
-{
+typedef struct {
 	__vo uint32_t CR1;				/* I2C Control register 1 - OFFSET 0x00 */
 	__vo uint32_t CR2;				/* I2C Control register 2 - OFFSET 0x04 */
 	__vo uint32_t OAR1;				/* I2C Own address register 1 - OFFSET 0x08 */
@@ -178,8 +177,7 @@ typedef struct
 } I2C_RegDef_t;
 
 
-typedef struct
-{
+typedef struct {
 	__vo uint32_t SR;				/* USART Status register - OFFSET 0x00 */
 	__vo uint32_t DR;				/* USART Data register - OFFSET 0x04 */
 	__vo uint32_t BRR;				/* USART Baud rate register - OFFSET 0x08 */
@@ -190,8 +188,7 @@ typedef struct
 } USART_RegDef_t;
 
 
-typedef struct
-{
+typedef struct {
 	__vo uint32_t CR;				/* RCC clock control register - OFFSET 0x00 */
 	__vo uint32_t PLLCFGR;			/* RCC PLL configuration register - OFFSET 0x04 */
 	__vo uint32_t CFGR;				/* RCC clock configuration register - OFFSET 0x08 */
@@ -229,8 +226,7 @@ typedef struct
 } RCC_RegDef_t;
 
 
-typedef struct
-{
+typedef struct {
 	__vo uint32_t MEMRMP;			/* SYSCFG memory remap register - OFFSET 0x00 */
 	__vo uint32_t PMC;				/* SYSCFG peripheral mode configuration register - OFFSET 0x04 */
 	__vo uint32_t EXTICR[4];		/* SYSCFG external interrupt configuration register 1 - OFFSET 0x08 */
@@ -241,8 +237,7 @@ typedef struct
 } SYSCFG_RegDef_t;
 
 
-typedef struct
-{
+typedef struct {
 	__vo uint32_t IMR;				/* Interrupt mask register - OFFSET 0x00 */
 	__vo uint32_t EMR;				/* Event mask register - OFFSET 0x04 */
 	__vo uint32_t RTSR;				/* Rising trigger selection register - OFFSET 0x08 */
@@ -252,54 +247,64 @@ typedef struct
 } EXTI_RegDef_t;
 
 
-typedef struct
-{
+typedef struct {
 	__vo uint32_t IER[8];			/* NVIC interrupt enable/clear register - OFFSET 0x00 */
 } NVIC_IER_RegDef_t;
 
-typedef struct
-{
+typedef struct {
 	__vo uint32_t IPR[60];			/* NVIC interrupt priority register - OFFSET 0x00 */
 } NVIC_IPR_RegDef_t;
+
+typedef struct {
+	__vo uint32_t  CSR;				/* SYSTCK control and status register - OFFSET 0x00 */
+	__vo uint32_t  RVR;				/* SYSTCK reload value register - OFFSET 0x04 */
+	__vo uint32_t  CVR;				/* SYSTCK current value register - OFFSET 0x08 */
+	__vo uint32_t  CALIB;			/* SYSTCK calibration value register - OFFSET 0x0C */
+} NVIC_SYSTCK_RegDef_t;
 
 
 
 /************* PERIPHERAL STRUCTURE MEMORY BLOCKS **********/
 
-#define GPIOA		((GPIO_RegDef_t*)(GPIOA_BASEADDR))
-#define GPIOB		((GPIO_RegDef_t*)(GPIOB_BASEADDR))
-#define GPIOC		((GPIO_RegDef_t*)(GPIOC_BASEADDR))
-#define GPIOD		((GPIO_RegDef_t*)(GPIOD_BASEADDR))
-#define GPIOE		((GPIO_RegDef_t*)(GPIOE_BASEADDR))
-#define GPIOF		((GPIO_RegDef_t*)(GPIOF_BASEADDR))
-#define GPIOG		((GPIO_RegDef_t*)(GPIOG_BASEADDR))
-#define GPIOH		((GPIO_RegDef_t*)(GPIOH_BASEADDR))
+#define GPIOA			((GPIO_RegDef_t*)(GPIOA_BASEADDR))
+#define GPIOB			((GPIO_RegDef_t*)(GPIOB_BASEADDR))
+#define GPIOC			((GPIO_RegDef_t*)(GPIOC_BASEADDR))
+#define GPIOD			((GPIO_RegDef_t*)(GPIOD_BASEADDR))
+#define GPIOE			((GPIO_RegDef_t*)(GPIOE_BASEADDR))
+#define GPIOF			((GPIO_RegDef_t*)(GPIOF_BASEADDR))
+#define GPIOG			((GPIO_RegDef_t*)(GPIOG_BASEADDR))
+#define GPIOH			((GPIO_RegDef_t*)(GPIOH_BASEADDR))
 
-#define SPI1		((SPI_RegDef_t*)(SPI1_BASEADDR))
-#define SPI2		((SPI_RegDef_t*)(SPI2_BASEADDR))
-#define SPI3		((SPI_RegDef_t*)(SPI3_BASEADDR))
-#define SPI4		((SPI_RegDef_t*)(SPI4_BASEADDR))
+#define SPI1			((SPI_RegDef_t*)(SPI1_BASEADDR))
+#define SPI2			((SPI_RegDef_t*)(SPI2_BASEADDR))
+#define SPI3			((SPI_RegDef_t*)(SPI3_BASEADDR))
+#define SPI4			((SPI_RegDef_t*)(SPI4_BASEADDR))
 
-#define I2C1		((I2C_RegDef_t*)(I2C1_BASEADDR))
-#define I2C2		((I2C_RegDef_t*)(I2C2_BASEADDR))
-#define I2C3		((I2C_RegDef_t*)(I2C3_BASEADDR))
+#define I2C1			((I2C_RegDef_t*)(I2C1_BASEADDR))
+#define I2C2			((I2C_RegDef_t*)(I2C2_BASEADDR))
+#define I2C3			((I2C_RegDef_t*)(I2C3_BASEADDR))
 
-#define USART1		((USART_RegDef_t*)(USART1_BASEADDR))
-#define USART2		((USART_RegDef_t*)(USART2_BASEADDR))
-#define USART3		((USART_RegDef_t*)(USART3_BASEADDR))
-#define UART4		((USART_RegDef_t*)(UART4_BASEADDR))
-#define UART5		((USART_RegDef_t*)(UART5_BASEADDR))
-#define USART6		((USART_RegDef_t*)(USART6_BASEADDR))
+#define USART1			((USART_RegDef_t*)(USART1_BASEADDR))
+#define USART2			((USART_RegDef_t*)(USART2_BASEADDR))
+#define USART3			((USART_RegDef_t*)(USART3_BASEADDR))
+#define UART4			((USART_RegDef_t*)(UART4_BASEADDR))
+#define UART5			((USART_RegDef_t*)(UART5_BASEADDR))
+#define USART6			((USART_RegDef_t*)(USART6_BASEADDR))
 
-#define RCC			((RCC_RegDef_t*)(RCC_BASEADDR))
+#define RCC				((RCC_RegDef_t*)(RCC_BASEADDR))
 
-#define SYSCFG		((SYSCFG_RegDef_t*)(SYSCFG_BASEADDR))
+#define SYSCFG			((SYSCFG_RegDef_t*)(SYSCFG_BASEADDR))
 
-#define EXTI		((EXTI_RegDef_t*)(EXTI_BASEADDR))
+#define EXTI			((EXTI_RegDef_t*)(EXTI_BASEADDR))
 
-#define NVIC_ISER	((NVIC_IER_RegDef_t*)(NVIC_ISER0_BASEADDR))
-#define NVIC_ICER	((NVIC_IER_RegDef_t*)(NVIC_ICER0_BASEADDR))
-#define NVIC_IPR	((NVIC_IPR_RegDef_t*)(NVIC_IPR0_BASEADDR))
+
+/***************** NVIC STRUCTURE MEMORY BLOCK *************/
+
+#define NVIC_ISER		((NVIC_IER_RegDef_t*)(NVIC_ISER0_BASEADDR))
+#define NVIC_ICER		((NVIC_IER_RegDef_t*)(NVIC_ICER0_BASEADDR))
+#define NVIC_IPR		((NVIC_IPR_RegDef_t*)(NVIC_IPR0_BASEADDR))
+
+#define NVIC_SYSTCK 	((NVIC_SYSTCK_RegDef_t*)(NVIC_SYSTCK_BASEADDR))
 
 
 
@@ -470,6 +475,7 @@ typedef struct
 #include "stm32f446xx_i2c_driver.h"
 #include "stm32f446xx_spi_driver.h"
 #include "stm32f446xx_usart_driver.h"
+#include "stm32f446xx_systck_driver.h"
 
 
 #endif /* INC_STM32F446XX_H_ */
