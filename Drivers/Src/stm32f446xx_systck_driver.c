@@ -33,31 +33,33 @@ uint8_t SYSTCK_Init(SYSTCK_Config_t* pSYSTCK)
 
 	// Write to CSR according to configured values
 	uint8_t temp = 1U;
-	if (pSYSTCK->SYSTCK_ClkSource == SYSTCK_EXT_CLK) { temp |= (1 << 2); }
+	if (pSYSTCK->SYSTCK_ClkSource == SYSTCK_INT_CLK) { temp |= (1 << 2); }
 	if (pSYSTCK->SYSTCK_IRQ == SYSTCK_IRQ_EN) { temp |= (1 << 1); }
 	NVIC_SYSTCK->CSR |= temp;
 
 	return SET;
 }
 
+
 /*
- * Function:	I2C_PeriClockControl
+ * Function:	SYSTCK_ReadValue
  *
- * Brief: 		Enable and disable clock signal to I2C peripherals
+ * Brief: 		Read current count from the system timer
  *
- * Params: 		struct I2C_RegDef_t* pI2Cx- I2C base address
- * 				uint8_t EnOrDi - Enable or disable value
+ * Retuen:		uint32_t - current value in system timer
  *
  */
-uint32_t SYSTCK_ReadCurrent()
+uint32_t SYSTCK_ReadValue()
 {
 	return (NVIC_SYSTCK->CVR & 0x00FFFFFF);
 }
 
+
 /*
- * Function:	I2C_PeriClockControl
+ * Function:	SYSTCK_CountFlag
  *
- * Brief: 		Enable and disable clock signal to I2C peripherals
+ * Brief: 		Checks is count flag is raised indicating the timer has hit 0
+ * 				The count flag is cleared by the read operation
  *
  * Params: 		struct I2C_RegDef_t* pI2Cx- I2C base address
  * 				uint8_t EnOrDi - Enable or disable value
@@ -74,9 +76,4 @@ uint8_t SYSTCK_CountFlag()
 		return RESET;
 	}
 }
-
-
-
-/*************** INTERRUPT OPERATIONS ************************/
-
 

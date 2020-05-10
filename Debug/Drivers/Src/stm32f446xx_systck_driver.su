@@ -1,3 +1,3 @@
 stm32f446xx_systck_driver.c:21:9:SYSTCK_Init	24	static
-stm32f446xx_systck_driver.c:52:10:SYSTCK_ReadCurrent	4	static
-stm32f446xx_systck_driver.c:66:9:SYSTCK_CountFlag	4	static
+stm32f446xx_systck_driver.c:52:10:SYSTCK_ReadValue	4	static
+stm32f446xx_systck_driver.c:68:9:SYSTCK_CountFlag	4	static

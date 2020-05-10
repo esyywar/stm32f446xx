@@ -32,18 +32,12 @@ void SYSTCK_DeInit();
 /*
  * Read current count value from system timer
  */
-uint32_t SYSTCK_ReadCurrent();
+uint32_t SYSTCK_ReadValue();
 
 /*
  * Read count flag to see if timer has reloaded
  */
 uint8_t SYSTCK_CountFlag();
-
-/*
- * Interrupt handling
- */
-void SYSTCK_IRQConfig(uint8_t IRQNumber, uint8_t EnOrDi);
-void SYSTCK_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
 
 
 /************************* CONFIGURATION VALUES *****************************/
@@ -53,8 +47,8 @@ void SYSTCK_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
 /*
  * Clock source
  */
-#define SYSTCK_EXT_CLK			1
-#define SYSTCK_INT_CLK			0
+#define SYSTCK_INT_CLK			1
+#define SYSTCK_EXT_CLK			0
 
 /*
  * Interrupt enabled?
