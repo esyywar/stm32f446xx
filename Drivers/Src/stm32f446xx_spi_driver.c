@@ -384,11 +384,11 @@ void SPI_IRQConfig(uint8_t IRQNumber, uint8_t EnOrDi)
 {
 	if (EnOrDi == ENABLE)
 	{
-		NVIC_ISER->IER[IRQNumber / 32] |= (1 << (IRQNumber % 32));
+		NVIC_ISER->ISER[IRQNumber / 32] |= (1 << (IRQNumber % 32));
 	}
 	else if (EnOrDi == DISABLE)
 	{
-		NVIC_ICER->IER[IRQNumber / 32] &= ~(1 << (IRQNumber % 32));
+		NVIC_ICER->ICER[IRQNumber / 32] |= (1 << (IRQNumber % 32));
 	}
 }
 

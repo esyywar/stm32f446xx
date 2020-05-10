@@ -248,8 +248,12 @@ typedef struct {
 
 
 typedef struct {
-	__vo uint32_t IER[8];			/* NVIC interrupt enable/clear register - OFFSET 0x00 */
-} NVIC_IER_RegDef_t;
+	__vo uint32_t ISER[8];			/* NVIC interrupt set-enable register - OFFSET 0x00 */
+} NVIC_ISER_RegDef_t;
+
+typedef struct {
+	__vo uint32_t ICER[8];			/* NVIC interrupt clear-enable register - OFFSET 0x00 */
+} NVIC_ICER_RegDef_t;
 
 typedef struct {
 	__vo uint32_t IPR[60];			/* NVIC interrupt priority register - OFFSET 0x00 */
@@ -300,8 +304,8 @@ typedef struct {
 
 /***************** NVIC STRUCTURE MEMORY BLOCK *************/
 
-#define NVIC_ISER		((NVIC_IER_RegDef_t*)(NVIC_ISER0_BASEADDR))
-#define NVIC_ICER		((NVIC_IER_RegDef_t*)(NVIC_ICER0_BASEADDR))
+#define NVIC_ISER		((NVIC_ISER_RegDef_t*)(NVIC_ISER0_BASEADDR))
+#define NVIC_ICER		((NVIC_ICER_RegDef_t*)(NVIC_ICER0_BASEADDR))
 #define NVIC_IPR		((NVIC_IPR_RegDef_t*)(NVIC_IPR0_BASEADDR))
 
 #define NVIC_SYSTCK 	((NVIC_SYSTCK_RegDef_t*)(NVIC_SYSTCK_BASEADDR))
@@ -400,6 +404,11 @@ typedef struct {
 
 
 /************************* NVIC IRQ POSITIONS *****************************/
+
+/*
+ * Exception interrupt positions
+ */
+#define IRQ_POS_SYSTCK			-1
 
 /*
  * EXTI lines global interrupts
