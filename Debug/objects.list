@@ -2,6 +2,7 @@
 "Drivers/Src/stm32f446xx_i2c_driver.o"
 "Drivers/Src/stm32f446xx_rcc_driver.o"
 "Drivers/Src/stm32f446xx_spi_driver.o"
+"Drivers/Src/stm32f446xx_systck_driver.o"
 "Drivers/Src/stm32f446xx_usart_driver.o"
 "Src/led_button.o"
 "Src/syscalls.o"

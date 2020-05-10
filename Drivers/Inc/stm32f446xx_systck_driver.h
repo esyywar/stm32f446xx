@@ -8,6 +8,9 @@
 #ifndef INC_STM32F446XX_SYSTCK_DRIVER_H_
 #define INC_STM32F446XX_SYSTCK_DRIVER_H_
 
+#include "stm32f446xx.h"
+
+
 /*
  * SYSTCK Configuration structure
  */
@@ -21,9 +24,10 @@ typedef struct {
 /************************ DRIVER APIS ************************/
 
 /*
- * Enable and configure the system timer - return 1 to indicate success
+ * Initialize and close
  */
-uint8_t SYSTCK_Config(SYSTCK_Config_t* pSYSTCK);
+uint8_t SYSTCK_Init(SYSTCK_Config_t* pSYSTCK);
+void SYSTCK_DeInit();
 
 /*
  * Read current count value from system timer
@@ -34,6 +38,12 @@ uint32_t SYSTCK_ReadCurrent();
  * Read count flag to see if timer has reloaded
  */
 uint8_t SYSTCK_CountFlag();
+
+/*
+ * Interrupt handling
+ */
+void SYSTCK_IRQConfig(uint8_t IRQNumber, uint8_t EnOrDi);
+void SYSTCK_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
 
 
 /************************* CONFIGURATION VALUES *****************************/
