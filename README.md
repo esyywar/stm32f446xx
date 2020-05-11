@@ -10,6 +10,7 @@ I am programming these drivers myself to better understand the ARM micocontrolle
 - [x] SPI
 - [x] I2C
 - [x] UART/USART
+- [x] SYSTCK (System Timer)
 - [ ] Timers
 - [ ] ADC
 
