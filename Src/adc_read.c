@@ -7,6 +7,9 @@
 
 #include "stm32f446xx.h"
 
+// For semihosting
+extern void initialise_monitor_handles(void);
+
 
 /* Handle for ADC peripheral */
 ADC_Handle_t Adc_Input;
@@ -60,7 +63,7 @@ void GPIO_USART_Config()
 /*
  * Configure USART2 in Tx
  */
-void USART1_Config()
+void USART2_Config()
 {
 	// Handle globally defined
 	Usart_Handle.USART_Config.USART_Mode = USART_RX_TX;
@@ -93,11 +96,14 @@ void ADC_IRQHandler() {
 }
 
 int main(void) {
+	// Enable semi-hosting
+	initialise_monitor_handles();
 
 	/* initialize GPIO PA0 as AI */
 	GPIO_AI_Init();
 
 	/* initialize UART2 for sending data via ST-Link */
+	USART2_Config();
 
 	/* initialize ADC1 */
 	ADC1_In_Init();
@@ -106,7 +112,7 @@ int main(void) {
 	Adc_Input.pDataBuffer = &value;
 
 	/* begin continuous read from ADC */
-	ADC_Read_Channel(&Adc_Input, ADC_IN0, ADC_SMP_480CYC, ADC_CONT_READ);
+	ADC_Read_Channel(&Adc_Input, ADC_IN0, ADC_SMP_3CYC, ADC_CONT_READ);
 
 
 	while(1) {
@@ -121,6 +127,7 @@ void ADC_ApplicationCallbackEvent(ADC_Handle_t *pADCxHandle, uint8_t event)
 	if (event == ADC_READ_CMPLT)
 	{
 		USART_Write(&Usart_Handle, (uint8_t*)&value, (uint8_t)2);
+		printf("ADC value is: [%i]\n", value);
 	}
 }
 

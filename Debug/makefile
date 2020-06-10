@@ -41,7 +41,7 @@ all: stm32f446xx.elf secondary-outputs
 
 # Tool invocations
 stm32f446xx.elf: $(OBJS) $(USER_OBJS) C:\Users\rahul\Desktop\Dev_Projects\Embedded\stm32CubeIDE\stm32f446xx\STM32F446RETX_FLASH.ld
-	arm-none-eabi-gcc -o "stm32f446xx.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\rahul\Desktop\Dev_Projects\Embedded\stm32CubeIDE\stm32f446xx\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f446xx.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "stm32f446xx.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\rahul\Desktop\Dev_Projects\Embedded\stm32CubeIDE\stm32f446xx\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f446xx.map" -Wl,--gc-sections -static -specs=rdimon.specs --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
