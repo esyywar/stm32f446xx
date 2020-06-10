@@ -26,6 +26,9 @@ typedef struct {
 	uint8_t USART_CPHA;
 } USART_Config_t;
 
+/*
+ * USART Handle Structure
+ */
 typedef struct {
 	USART_RegDef_t* pUSARTx;
 	USART_Config_t USART_Config;

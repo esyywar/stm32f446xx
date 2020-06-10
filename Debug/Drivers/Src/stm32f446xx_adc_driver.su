@@ -1,0 +1,3 @@
+stm32f446xx_adc_driver.c:22:6:ADC_PeriClockControl	16	static
+stm32f446xx_adc_driver.c:69:6:ADC_IRQConfig	16	static
+stm32f446xx_adc_driver.c:91:6:ADC_IRQPriorityConfig	24	static

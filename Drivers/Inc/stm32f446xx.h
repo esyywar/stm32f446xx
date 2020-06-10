@@ -217,7 +217,7 @@ typedef struct {
 	__vo uint32_t CSR;				/* ADC Common status register - OFFSET 0x00 */
 	__vo uint32_t CCR;				/* ADC common control register - OFFSET 0x04 */
 	__vo uint32_t CDR;				/* ADC common regular data register for dual and triple modes - OFFSET 0x08 */
-} ADC_Common_RegDef_t;
+} ADC_Comm_RegDef_t;
 
 
 /* RCC register */
@@ -334,7 +334,7 @@ typedef struct {
 #define ADC1			((ADC_RegDef_t*)(ADC1_BASEADDR))
 #define ADC2			((ADC_RegDef_t*)(ADC2_BASEADDR))
 #define ADC3			((ADC_RegDef_t*)(ADC3_BASEADDR))
-#define ADC_COMM		((ADC_Common_RegDef_t*)(ADC_COMM_BASEADDR))
+#define ADC_COMM		((ADC_Comm_RegDef_t*)(ADC_COMM_BASEADDR))
 
 #define RCC				((RCC_RegDef_t*)(RCC_BASEADDR))
 
@@ -397,7 +397,7 @@ typedef struct {
  */
 #define ADC1_PCLK_EN() 		(RCC->APB2ENR |= (1 << 8))
 #define ADC2_PCLK_EN() 		(RCC->APB2ENR |= (1 << 9))
-#define ADC3_CLK_EN() 		(RCC->APB2ENR |= (1 << 10))
+#define ADC3_PCLK_EN() 		(RCC->APB2ENR |= (1 << 10))
 
 /*
  * Clock enable macro for SYSCFG
@@ -449,7 +449,7 @@ typedef struct {
  */
 #define ADC1_PCLK_DI() 		(RCC->APB2ENR &= ~(1 << 8))
 #define ADC2_PCLK_DI() 		(RCC->APB2ENR &= ~(1 << 9))
-#define ADC3_CLK_DI() 		(RCC->APB2ENR &= ~(1 << 10))
+#define ADC3_PCLK_DI() 		(RCC->APB2ENR &= ~(1 << 10))
 
 /*
  * Clock enable macro for SYSCFG
