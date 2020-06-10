@@ -129,7 +129,8 @@ void ADC_Read_Channel(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_S
 	pADCxHandle->pADCx->SQR[2] = (ADC_CHAN << 0);
 
 	// 5. Number of sampling cycles
-	pADCxHandle->pADCx->SMPR[1] = (ADC_SMP_CYC << 0);
+	uint8_t temp1 = 1 - ADC_CHAN / 10, temp2 = ADC_CHAN % 9;
+	pADCxHandle->pADCx->SMPR[temp1] = (ADC_SMP_CYC << temp2);
 
 	// 6. Enable end of conversion interrupt
 	pADCxHandle->pADCx->CR1 |= (1 << 5);
