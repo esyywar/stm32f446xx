@@ -85,6 +85,12 @@
 #define USART1_BASEADDR		(APB2_BASEADDR + 0x1000)
 #define USART6_BASEADDR		(APB2_BASEADDR + 0x1400)
 
+#define ADC_BASEADDR		(APB2_BASEADDR + 0x2000)
+#define ADC1_BASEADDR		(ADC_BASEADDR + 0x04C)
+#define ADC2_BASEADDR		(ADC_BASEADDR + 0x14C)
+#define ADC3_BASEADDR		(ADC_BASEADDR + 0x24C)
+#define ADC_COMM_BASEADDR	(ADC1_BASEADDR + 0x300)
+
 #define SPI1_BASEADDR		(APB2_BASEADDR + 0x3000)
 #define SPI4_BASEADDR		(APB2_BASEADDR + 0x3400)
 
@@ -139,6 +145,7 @@
 
 /************* PERIPHERAL REGISTER DEFINITION STRUCTURES **********/
 
+/* GPIO register */
 typedef struct {
 	__vo uint32_t MODER;			/* GPIO port mode register - OFFSET 0x00 */
 	__vo uint32_t OTYPER;			/* GPIO port output type register - OFFSET 0x04 */
@@ -151,7 +158,7 @@ typedef struct {
 	__vo uint32_t AFR[2];			/* [0] GPIO alternate function low register - OFFSET 0x20, [1] GPIO alternate function high register - OFFSET 0x24 */
 } GPIO_RegDef_t;
 
-
+/* SPI register */
 typedef struct {
 	__vo uint32_t CR1;				/* SPI control register 1 - OFFSET 0x00 */
 	__vo uint32_t CR2;				/* SPI control register 2 - OFFSET 0x04 */
@@ -164,6 +171,7 @@ typedef struct {
 	__vo uint32_t I2SPR;			/* SPI_I2S prescaler register - OFFSET 0x20 */
 } SPI_RegDef_t;
 
+/* I2C register */
 typedef struct {
 	__vo uint32_t CR1;				/* I2C Control register 1 - OFFSET 0x00 */
 	__vo uint32_t CR2;				/* I2C Control register 2 - OFFSET 0x04 */
@@ -177,7 +185,7 @@ typedef struct {
 	__vo uint32_t FLTR;				/* I2C FLTR register - OFFSET 0x24 */
 } I2C_RegDef_t;
 
-
+/* UART / USART register */
 typedef struct {
 	__vo uint32_t SR;				/* USART Status register - OFFSET 0x00 */
 	__vo uint32_t DR;				/* USART Data register - OFFSET 0x04 */
@@ -188,7 +196,31 @@ typedef struct {
 	__vo uint32_t GTPR;				/* USART Guard time and prescaler register - OFFSET 0x18 */
 } USART_RegDef_t;
 
+/* ADC register */
+typedef struct {
+	__vo uint32_t SR;				/* ADC Status register - OFFSET 0x00 */
+	__vo uint32_t CR1;				/* ADC Control register 1 - OFFSET 0x04 */
+	__vo uint32_t CR2;				/* ADC Control register 2 - OFFSET 0x08 */
+	__vo uint32_t SMPR1;			/* ADC sample time register 1 - OFFSET 0x0C */
+	__vo uint32_t SMPR2;			/* ADC sample time register 2 - OFFSET 0x10 */
+	__vo uint32_t JOFR[4];			/* ADC injected channel data offset register x - OFFSET 0x14 */
+	__vo uint32_t HTR;				/* ADC watchdog higher threshold register - OFFSET 0x24 */
+	__vo uint32_t LTR;				/* ADC watchdog lower threshold register - OFFSET 0x28 */
+	__vo uint32_t SQR[3];			/* ADC regular sequence register x - OFFSET 0x2C */
+	__vo uint32_t JSQR;				/* ADC injected sequence register - OFFSET 0x38 */
+	__vo uint32_t JDR[3];			/* ADC injected data register x - OFFSET 0x3C */
+	__vo uint32_t DR;				/* ADC regular data register - OFFSET 0x4C */
+} ADC_RegDef_t;
 
+/* ADC Common register */
+typedef struct {
+	__vo uint32_t CSR;				/* ADC Common status register - OFFSET 0x00 */
+	__vo uint32_t CCR;				/* ADC common control register - OFFSET 0x04 */
+	__vo uint32_t CDR;				/* ADC common regular data register for dual and triple modes - OFFSET 0x08 */
+} ADC_Common_RegDef_t;
+
+
+/* RCC register */
 typedef struct {
 	__vo uint32_t CR;				/* RCC clock control register - OFFSET 0x00 */
 	__vo uint32_t PLLCFGR;			/* RCC PLL configuration register - OFFSET 0x04 */
@@ -226,7 +258,7 @@ typedef struct {
 	__vo uint32_t DCKCFGR2;			/* RCC dedicated clocks configuration register 2 - OFFSET 0x94 */
 } RCC_RegDef_t;
 
-
+/* SYSCFG register */
 typedef struct {
 	__vo uint32_t MEMRMP;			/* SYSCFG memory remap register - OFFSET 0x00 */
 	__vo uint32_t PMC;				/* SYSCFG peripheral mode configuration register - OFFSET 0x04 */
@@ -237,7 +269,7 @@ typedef struct {
 	__vo uint32_t CFGR;				/* SYSCFG configuration register - OFFSET 0x2C */
 } SYSCFG_RegDef_t;
 
-
+/* EXTI register */
 typedef struct {
 	__vo uint32_t IMR;				/* Interrupt mask register - OFFSET 0x00 */
 	__vo uint32_t EMR;				/* Event mask register - OFFSET 0x04 */
@@ -247,19 +279,22 @@ typedef struct {
 	__vo uint32_t PR;				/* Pending register - 0x14 */
 } EXTI_RegDef_t;
 
-
+/* NVIC ISER register */
 typedef struct {
 	__vo uint32_t ISER[8];			/* NVIC interrupt set-enable register - OFFSET 0x00 */
 } NVIC_ISER_RegDef_t;
 
+/* NVIC ICER register */
 typedef struct {
 	__vo uint32_t ICER[8];			/* NVIC interrupt clear-enable register - OFFSET 0x00 */
 } NVIC_ICER_RegDef_t;
 
+/* NVIC IPR register */
 typedef struct {
 	__vo uint32_t IPR[60];			/* NVIC interrupt priority register - OFFSET 0x00 */
 } NVIC_IPR_RegDef_t;
 
+/* NVIC SYSTCK register */
 typedef struct {
 	__vo uint32_t  CSR;				/* SYSTCK control and status register - OFFSET 0x00 */
 	__vo uint32_t  RVR;				/* SYSTCK reload value register - OFFSET 0x04 */
@@ -295,6 +330,11 @@ typedef struct {
 #define UART4			((USART_RegDef_t*)(UART4_BASEADDR))
 #define UART5			((USART_RegDef_t*)(UART5_BASEADDR))
 #define USART6			((USART_RegDef_t*)(USART6_BASEADDR))
+
+#define ADC1			((ADC_RegDef_t*)(ADC1_BASEADDR))
+#define ADC2			((ADC_RegDef_t*)(ADC2_BASEADDR))
+#define ADC3			((ADC_RegDef_t*)(ADC3_BASEADDR))
+#define ADC_COMM		((ADC_Common_RegDef_t*)(ADC_COMM_BASEADDR))
 
 #define RCC				((RCC_RegDef_t*)(RCC_BASEADDR))
 
@@ -353,6 +393,13 @@ typedef struct {
 #define USART6_PCLK_EN()	(RCC->APB2ENR |= (1 << 5))
 
 /*
+ * Clock enable macros for ADC
+ */
+#define ADC1_PCLK_EN() 		(RCC->APB2ENR |= (1 << 8))
+#define ADC2_PCLK_EN() 		(RCC->APB2ENR |= (1 << 9))
+#define ADC3_CLK_EN() 		(RCC->APB2ENR |= (1 << 10))
+
+/*
  * Clock enable macro for SYSCFG
  */
 #define SYSCFG_PCLK_EN()	(RCC->APB2ENR |= (1 << 14))
@@ -361,7 +408,7 @@ typedef struct {
 /************* CLOCK DISABLE MACROS **********/
 
 /*
- * Clock enable macros for GPIO
+ * Clock disable macros for GPIO
  */
 #define GPIOA_PCLK_DI()		(RCC->AHB1ENR &= ~(1 << 0))
 #define GPIOB_PCLK_DI()		(RCC->AHB1ENR &= ~(1 << 1))
@@ -373,14 +420,14 @@ typedef struct {
 #define GPIOH_PCLK_DI()		(RCC->AHB1ENR &= ~(1 << 7))
 
 /*
- * Clock enable macros for I2C
+ * Clock disable macros for I2C
  */
 #define I2C1_PCLK_DI()		(RCC->APB1ENR &= ~(1 << 21))
 #define I2C2_PCLK_DI()		(RCC->APB1ENR &= ~(1 << 22))
 #define I2C3_PCLK_DI()		(RCC->APB1ENR &= ~(1 << 23))
 
 /*
- * Clock enable macros for SPI
+ * Clock disable macros for SPI
  */
 #define SPI1_PCLK_DI()		(RCC->APB2ENR &= ~(1 << 12))
 #define SPI2_PCLK_DI()		(RCC->APB1ENR &= ~(1 << 14))
@@ -388,7 +435,7 @@ typedef struct {
 #define SPI4_PCLK_DI()		(RCC->APB2ENR &= ~(1 << 13))
 
 /*
- * Clock enable macros for USART
+ * Clock disable macros for USART
  */
 #define USART1_PCLK_DI()	(RCC->APB2ENR &= ~(1 << 4))
 #define USART2_PCLK_DI()	(RCC->APB1ENR &= ~(1 << 17))
@@ -396,6 +443,13 @@ typedef struct {
 #define UART4_PCLK_DI()		(RCC->APB1ENR &= ~(1 << 19))
 #define UART5_PCLK_DI()		(RCC->APB1ENR &= ~(1 << 20))
 #define USART6_PCLK_DI()	(RCC->APB2ENR &= ~(1 << 5))
+
+/*
+ * Clock disable macros for ADC
+ */
+#define ADC1_PCLK_DI() 		(RCC->APB2ENR &= ~(1 << 8))
+#define ADC2_PCLK_DI() 		(RCC->APB2ENR &= ~(1 << 9))
+#define ADC3_CLK_DI() 		(RCC->APB2ENR &= ~(1 << 10))
 
 /*
  * Clock enable macro for SYSCFG
@@ -454,6 +508,10 @@ typedef struct {
 #define IRQ_POS_UART5			53
 #define IRQ_POS_USART6			71
 
+/*
+ * ADC global interrupts
+ */
+#define IRQ_POS_ADC				18
 
 /*
  * IRQ priority macros
