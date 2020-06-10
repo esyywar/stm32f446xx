@@ -24,8 +24,8 @@ typedef struct {
  */
 typedef struct {
 	ADC_RegDef_t *pADCx;
-	ADC_Comm_RegDef_t *pAdcComm;
 	ADC_Config_t ADC_Config;
+	uint16_t *pDataBuffer;
 } ADC_Handle_t;
 
 
@@ -42,34 +42,43 @@ typedef struct {
 void ADC_PeriClockControl(ADC_RegDef_t *pADCx, uint8_t EnOrDi);
 
 /*
- * Initialize and close
+ * Initialize and reset
  */
 void ADC_Init(ADC_Handle_t *pADCxHandle);
-void ADC_DeInit(ADC_RegDef_t *pADCx);
+void ADC_DeInit();
 
 /*
  * Read from ADC
  */
-void ADC_SingleRead(ADC_Handle_t *pADCxHandle, uint8_t adcChn, uint8_t sampleCycles);
+void ADC_Read_Channel(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_SMP_CYC, uint8_t ADC_DAQ_MODE);
 
 /*
- * ADC Interrupt Handling
+ * ADC Interrupt Configuration
  */
 void ADC_IRQConfig(uint8_t IRQNumber, uint8_t EnOrDi);
 void ADC_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
-void ADC_IRQHandling(uint8_t PinNumber);
+
+/*
+ * Read flag status from the SR
+ */
+uint8_t ADC_GetFlagStatus(ADC_RegDef_t *pADCx, uint8_t ADC_FLAG);
+
+/*
+ * Event and error interrupt handlers
+ */
+void ADC_EV_IRQHandling(ADC_Handle_t *pADCxHandle);
+void ADC_ER_IRQHandling(ADC_Handle_t *pADCxHandle);
+
+/*
+ * Application callback used to notify of interrupt events and errors
+ */
+__weak void ADC_ApplicationCallbackEvent(ADC_Handle_t *pADCxHandle, uint8_t event);
 
 
 /************************* CONFIGURATION VALUES *****************************/
 
 /*
- * Single read or scan mode
- */
-#define ADC_MODE_SCAN			0
-#define ADC_MODE_SINGLE			1
-
-/*
- * Read once or continuous
+ * ADC acquisition mode
  */
 #define ADC_SINGLE_READ			0
 #define ADC_CONT_READ			1
@@ -130,6 +139,20 @@ void ADC_IRQHandling(uint8_t PinNumber);
 #define ADC_SMP_144CYC			6
 #define ADC_SMP_480CYC			7
 
+
+/******************* STATUS REGISTER FLAGS *****************/
+
+#define ADC_FLAG_AWD			(1 << 0)
+#define ADC_FLAG_EOC			(1 << 1)
+#define ADC_FLAG_JEOC     		(1 << 2)
+#define ADC_FLAG_JSTRT     		(1 << 3)
+#define ADC_FLAG_STRT     		(1 << 4)
+#define ADC_FLAG_OVR       		(1 << 5)
+
+
+/******************* ADC CALLBACK EVENTS ********************/
+
+#define ADC_READ_CMPLT			0
 
 
 #endif

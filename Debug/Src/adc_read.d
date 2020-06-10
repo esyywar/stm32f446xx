@@ -1,4 +1,4 @@
-Src/sys_timer_led.o: ../Src/sys_timer_led.c \
+Src/adc_read.o: ../Src/adc_read.c \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx.h \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_rcc_driver.h \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx.h \
@@ -6,7 +6,8 @@ Src/sys_timer_led.o: ../Src/sys_timer_led.c \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_i2c_driver.h \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_spi_driver.h \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_usart_driver.h \
- C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_systck_driver.h
+ C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_systck_driver.h \
+ C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_adc_driver.h
 
 C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx.h:
 
@@ -23,3 +24,5 @@ C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/In
 C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_usart_driver.h:
 
 C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_systck_driver.h:
+
+C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_adc_driver.h:

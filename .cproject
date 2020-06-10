@@ -75,7 +75,7 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
-						<entry excluding="led_button.c|usart_write_read_IT.c|usart_msgs_IT.c|i2c_master_read_cmd.c|irq_led_btn.c|led_toggle.c|i2c_slave_read_IT.c|i2c_master_read_cmd_IT.c|spi_arduino_cmd_IT.c|i2c_master_write.c|stm_arduino_cmd_IT.c|spi_arduino_cmd_handle.c|spi_arduino_rx.c|spi_comm.c|ext_led_btn.c|int_led_btn.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
+						<entry excluding="sys_timer_led.c|led_button.c|usart_write_read_IT.c|usart_msgs_IT.c|i2c_master_read_cmd.c|irq_led_btn.c|led_toggle.c|i2c_slave_read_IT.c|i2c_master_read_cmd_IT.c|spi_arduino_cmd_IT.c|i2c_master_write.c|stm_arduino_cmd_IT.c|spi_arduino_cmd_handle.c|spi_arduino_rx.c|spi_comm.c|ext_led_btn.c|int_led_btn.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Startup"/>
 					</sourceEntries>
 				</configuration>

@@ -1,3 +1,9 @@
-stm32f446xx_adc_driver.c:22:6:ADC_PeriClockControl	16	static
-stm32f446xx_adc_driver.c:69:6:ADC_IRQConfig	16	static
-stm32f446xx_adc_driver.c:91:6:ADC_IRQPriorityConfig	24	static
+stm32f446xx_adc_driver.c:27:6:ADC_PeriClockControl	16	static
+stm32f446xx_adc_driver.c:70:6:ADC_Init	16	static
+stm32f446xx_adc_driver.c:93:6:ADC_DeInit	4	static
+stm32f446xx_adc_driver.c:110:6:ADC_Read_Channel	16	static
+stm32f446xx_adc_driver.c:152:9:ADC_GetFlagStatus	16	static
+stm32f446xx_adc_driver.c:170:6:ADC_IRQConfig	16	static
+stm32f446xx_adc_driver.c:192:6:ADC_IRQPriorityConfig	24	static
+stm32f446xx_adc_driver.c:208:6:ADC_EV_IRQHandling	16	static
+stm32f446xx_adc_driver.c:247:6:ADC_Read_IT_Handle	16	static

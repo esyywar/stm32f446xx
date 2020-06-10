@@ -19,7 +19,7 @@
  * General macros
  */
 #define __vo		volatile
-#define __weak __attribute__((weak))
+#define __weak 		__attribute__((weak))
 
 #define LOW			0
 #define HIGH		1
@@ -86,9 +86,9 @@
 #define USART6_BASEADDR		(APB2_BASEADDR + 0x1400)
 
 #define ADC_BASEADDR		(APB2_BASEADDR + 0x2000)
-#define ADC1_BASEADDR		(ADC_BASEADDR + 0x04C)
-#define ADC2_BASEADDR		(ADC_BASEADDR + 0x14C)
-#define ADC3_BASEADDR		(ADC_BASEADDR + 0x24C)
+#define ADC1_BASEADDR		(ADC_BASEADDR)
+#define ADC2_BASEADDR		(ADC_BASEADDR + 0x100)
+#define ADC3_BASEADDR		(ADC_BASEADDR + 0x200)
 #define ADC_COMM_BASEADDR	(ADC1_BASEADDR + 0x300)
 
 #define SPI1_BASEADDR		(APB2_BASEADDR + 0x3000)
@@ -201,14 +201,13 @@ typedef struct {
 	__vo uint32_t SR;				/* ADC Status register - OFFSET 0x00 */
 	__vo uint32_t CR1;				/* ADC Control register 1 - OFFSET 0x04 */
 	__vo uint32_t CR2;				/* ADC Control register 2 - OFFSET 0x08 */
-	__vo uint32_t SMPR1;			/* ADC sample time register 1 - OFFSET 0x0C */
-	__vo uint32_t SMPR2;			/* ADC sample time register 2 - OFFSET 0x10 */
+	__vo uint32_t SMPR[2];			/* ADC sample time register x - OFFSET 0x0C */
 	__vo uint32_t JOFR[4];			/* ADC injected channel data offset register x - OFFSET 0x14 */
 	__vo uint32_t HTR;				/* ADC watchdog higher threshold register - OFFSET 0x24 */
 	__vo uint32_t LTR;				/* ADC watchdog lower threshold register - OFFSET 0x28 */
 	__vo uint32_t SQR[3];			/* ADC regular sequence register x - OFFSET 0x2C */
 	__vo uint32_t JSQR;				/* ADC injected sequence register - OFFSET 0x38 */
-	__vo uint32_t JDR[3];			/* ADC injected data register x - OFFSET 0x3C */
+	__vo uint32_t JDR[4];			/* ADC injected data register x - OFFSET 0x3C */
 	__vo uint32_t DR;				/* ADC regular data register - OFFSET 0x4C */
 } ADC_RegDef_t;
 
@@ -544,6 +543,7 @@ typedef struct {
 #include "stm32f446xx_spi_driver.h"
 #include "stm32f446xx_usart_driver.h"
 #include "stm32f446xx_systck_driver.h"
+#include "stm32f446xx_adc_driver.h"
 
 
 #endif /* INC_STM32F446XX_H_ */
