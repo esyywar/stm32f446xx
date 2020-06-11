@@ -1,4 +1,4 @@
-Src/adc_read.o: ../Src/adc_read.c \
+Src/adc_read_to_usart.o: ../Src/adc_read_to_usart.c \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx.h \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_rcc_driver.h \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx.h \

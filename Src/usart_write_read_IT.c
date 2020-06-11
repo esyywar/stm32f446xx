@@ -139,6 +139,7 @@ int main(void)
 
 	while(1)
 	{
+		/* Count to cycle through messages in msg array */
 		count = count % 3;
 
 		// 4. Wait till button press, turn on LED for visual feedback
