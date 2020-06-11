@@ -4,9 +4,9 @@ stm32f446xx_adc_driver.c:90:6:ADC_DeInit	4	static
 stm32f446xx_adc_driver.c:105:13:ADC_OnOff	16	static
 stm32f446xx_adc_driver.c:127:9:ADC_GetFlagStatus	16	static
 stm32f446xx_adc_driver.c:144:10:ADC_Read_Reg	24	static
-stm32f446xx_adc_driver.c:197:6:ADC_Scan_Reg	40	static
-stm32f446xx_adc_driver.c:253:6:ADC_IRQConfig	16	static
-stm32f446xx_adc_driver.c:275:6:ADC_IRQPriorityConfig	24	static
-stm32f446xx_adc_driver.c:293:6:ADC_Read_Reg_IT	24	static
+stm32f446xx_adc_driver.c:193:6:ADC_Scan_Reg	40	static
+stm32f446xx_adc_driver.c:250:6:ADC_IRQConfig	16	static
+stm32f446xx_adc_driver.c:272:6:ADC_IRQPriorityConfig	24	static
+stm32f446xx_adc_driver.c:290:6:ADC_Read_Reg_IT	24	static
 stm32f446xx_adc_driver.c:345:6:ADC_EV_IRQHandling	16	static
-stm32f446xx_adc_driver.c:384:6:ADC_Read_IT_Handle	16	static
+stm32f446xx_adc_driver.c:393:6:ADC_Read_IT_Handle	16	static

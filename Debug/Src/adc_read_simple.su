@@ -1,0 +1,5 @@
+adc_read_simple.c:23:6:GPIO_AI_Init	24	static
+adc_read_simple.c:42:6:GPIO_USART_Config	24	static
+adc_read_simple.c:65:6:USART2_Config	8	static
+adc_read_simple.c:81:6:ADC1_In_Init	8	static
+adc_read_simple.c:91:5:main	64	static

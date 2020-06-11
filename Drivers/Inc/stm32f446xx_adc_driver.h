@@ -27,6 +27,9 @@ typedef struct {
 	ADC_RegDef_t *pADCx;
 	ADC_Config_t ADC_Config;
 	uint16_t *pDataBuffer;
+	uint8_t readState;
+	uint8_t isContMode;
+	uint8_t dataLen;
 } ADC_Handle_t;
 
 
@@ -71,6 +74,11 @@ void ADC_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
  */
 void ADC_Read_Reg_IT(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_SMP_CYC, uint8_t ADC_DAQ_MODE);
 void ADC_Scan_Reg_IT();
+
+/*
+ * For exiting continuous interrupt ADC read mode
+ */
+void ADC_Read_Reg_Exit();
 
 
 /*
@@ -197,6 +205,19 @@ __weak void ADC_ApplicationCallbackEvent(ADC_Handle_t *pADCxHandle, uint8_t even
  */
 #define ADC_EOC_ON_REG_SEQ		0
 #define ADC_EOC_ON_REG_CONV		1
+
+
+/*
+ * Interrupt states
+ */
+#define ADC_READY				0
+#define ADC_BUSY_READ			1
+
+/*
+ * Continuous mode
+ */
+#define ADC_SINGLE_MODE			0
+#define ADC_CONT_MODE			1
 
 
 

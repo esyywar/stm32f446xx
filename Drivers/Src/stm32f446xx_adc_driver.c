@@ -162,20 +162,16 @@ uint16_t ADC_Read_Reg(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_S
 	uint8_t temp1 = 1 - ADC_CHAN / 10, temp2 = ADC_CHAN % 9;
 	pADCxHandle->pADCx->SMPR[temp1] = (ADC_SMP_CYC << temp2);
 
-	// 7. Enable end of conversion interrupt
-	pADCxHandle->pADCx->CR1 |= (1 << 5);
-	ADC_IRQConfig(IRQ_POS_ADC, ENABLE);
-
-	// 8. Begin conversion
+	// 7. Begin conversion
 	pADCxHandle->pADCx->CR2 |= (1 << 30);
 
-	// 9. Hang till conversion complete
+	// 8. Hang till conversion complete
 	while(!ADC_GetFlagStatus(pADCxHandle->pADCx, ADC_FLAG_EOC));
 
-	// 10. Get reading from DR
+	// 9. Get reading from DR
 	uint16_t data = pADCxHandle->pADCx->DR;
 
-	// 11. Return ADC to low power mode
+	// 10. Return ADC to low power mode
 	ADC_OnOff(pADCxHandle->pADCx, DISABLE);
 
 	return data;
@@ -238,6 +234,7 @@ void ADC_Scan_Reg(ADC_Handle_t *pADCxHandle, uint8_t NUM_CHAN, uint8_t *pSeqBuff
 }
 
 
+
 /************************************************ INTERRUPT CONFIG AND HANLDER APIS ****************************************/
 
 
@@ -293,33 +290,37 @@ void ADC_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority)
 void ADC_Read_Reg_IT(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_SMP_CYC, uint8_t ADC_DAQ_MODE)
 {
 	// 1. Set the ADC On (Note: several steps b/w this and 'START' to allow stabilization time
-	pADCxHandle->pADCx->CR2 |= (1 << 0);
+	ADC_OnOff(pADCxHandle->pADCx, ENABLE);
 
-	// 2. Reset ADC continuous mode for single reading
+	// 2. Disable scan mode
+	pADCxHandle->pADCx->CR1 &= ~(1 << 8);
+
+	// 3. Continuous or single read mode
 	if (ADC_DAQ_MODE == ADC_SINGLE_READ)
 	{
 		pADCxHandle->pADCx->CR2 &= ~(1 << 1);
 	}
 	else if (ADC_DAQ_MODE == ADC_CONT_READ)
 	{
+		pADCxHandle->isContMode = ADC_CONT_MODE;
 		pADCxHandle->pADCx->CR2 |= (1 << 1);
 	}
 
-	// 3. Set number of channels in sequence to 1
+	// 4. Set number of channels in sequence to 1
 	pADCxHandle->pADCx->SQR[0] &= ~(0xF << 20);
 
-	// 4. Load the channel to be read
+	// 5. Load the channel to be read
 	pADCxHandle->pADCx->SQR[2] = (ADC_CHAN << 0);
 
-	// 5. Number of sampling cycles
+	// 6. Number of sampling cycles
 	uint8_t temp1 = 1 - ADC_CHAN / 10, temp2 = ADC_CHAN % 9;
 	pADCxHandle->pADCx->SMPR[temp1] = (ADC_SMP_CYC << temp2);
 
-	// 6. Enable end of conversion interrupt
+	// 7. Enable end of conversion interrupt
 	pADCxHandle->pADCx->CR1 |= (1 << 5);
 	ADC_IRQConfig(IRQ_POS_ADC, ENABLE);
 
-	// 7. Either set trigger or begin conversion
+	// 8. Either set trigger or begin conversion
 	if (pADCxHandle->ADC_Config.ADC_Trig_Pol == ADC_EXTEN_DI)
 	{
 		// Start conversion of regular channels
@@ -338,8 +339,7 @@ void ADC_Read_Reg_IT(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_SM
  *
  * Brief: 		Handle interrupt events from ADCs
  *
- * Params: 		uint8_t IRQNumber - IRQ position being configured
- * 				uint8_t IRQPriority - Priority value (0 - 255)
+ * Params: 		struct ADC_Handle_t* *pADCx - ADC handle address
  *
  */
 void ADC_EV_IRQHandling(ADC_Handle_t *pADCxHandle)
@@ -381,13 +381,37 @@ void ADC_EV_IRQHandling(ADC_Handle_t *pADCxHandle)
 	}
 }
 
+
+/*
+ * Function:	ADC_Read_IT_Handle
+ *
+ * Brief: 		Called by interrupt event handler when EOC is raised. Reads data from DR.
+ *
+ * Params: 		struct ADC_Handle_t* *pADCx - ADC handle address
+ *
+ */
 void ADC_Read_IT_Handle(ADC_Handle_t *pADCxHandle)
 {
-	// 1. Read value from DR into buffer
+	// Read value from DR into buffer
 	*(pADCxHandle->pDataBuffer) = pADCxHandle->pADCx->DR & 0xFFFF;
 
-	// 2. Send callback
-	ADC_ApplicationCallbackEvent(pADCxHandle, ADC_READ_CMPLT);
-}
+	if (pADCxHandle->isContMode == ADC_CONT_MODE)
+	{
+		// If in continuous mode, send callback on each read
+		ADC_ApplicationCallbackEvent(pADCxHandle, ADC_READ_CMPLT);
+	}
+	else if (pADCxHandle->isContMode == ADC_SINGLE_MODE)
+	{
+		// If not in continuous, adjust data buffers and length
+		(pADCxHandle->pDataBuffer)++;
+		pADCxHandle->dataLen--;
 
+		// If reached end of data sequence, low power mode and send callback
+		if (pADCxHandle->dataLen == 0)
+		{
+			ADC_OnOff(pADCxHandle->pADCx, DISABLE);
+			ADC_ApplicationCallbackEvent(pADCxHandle, ADC_READ_CMPLT);
+		}
+	}
+}
 
