@@ -16,7 +16,8 @@
 typedef struct {
 	uint8_t ADC_Res;
 	uint8_t ADC_PreSc;
-	uint8_t ADC_Ext_Trig;
+	uint8_t ADC_Trig_Pol;
+	uint8_t ADC_Trig_Src;
 } ADC_Config_t;
 
 /*
@@ -48,15 +49,29 @@ void ADC_Init(ADC_Handle_t *pADCxHandle);
 void ADC_DeInit();
 
 /*
- * Read from ADC
+ * Regular read from ADC
  */
-void ADC_Read_Channel(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_SMP_CYC, uint8_t ADC_DAQ_MODE);
+uint16_t ADC_Read_Reg(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_SMP_CYC);
+void ADC_Scan_Reg(ADC_Handle_t *pADCxHandle, uint8_t NUM_CHAN, uint8_t *pSeqBuffer, uint8_t *pSmpBuffer, uint16_t *pDataBuffer);
+
+/*
+ * Injected read from ADC
+ */
+void ADC_Read_Inj_Channel();
+void ADC_Read_Inj_Scan();
 
 /*
  * ADC Interrupt Configuration
  */
 void ADC_IRQConfig(uint8_t IRQNumber, uint8_t EnOrDi);
 void ADC_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
+
+/*
+ * Interrupt enabled ADC read
+ */
+void ADC_Read_Reg_IT(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_SMP_CYC, uint8_t ADC_DAQ_MODE);
+void ADC_Scan_Reg_IT();
+
 
 /*
  * Read flag status from the SR
@@ -138,6 +153,51 @@ __weak void ADC_ApplicationCallbackEvent(ADC_Handle_t *pADCxHandle, uint8_t even
 #define ADC_SMP_112CYC			5
 #define ADC_SMP_144CYC			6
 #define ADC_SMP_480CYC			7
+
+/*
+ * External triggers
+ */
+#define ADC_EXT_TIM1_CH1		0
+#define ADC_EXT_TIM1_CH2		1
+#define ADC_EXT_TIM1_CH3		2
+#define ADC_EXT_TIM2_CH2		3
+#define ADC_EXT_TIM2_CH3		4
+#define ADC_EXT_TIM2_CH4		5
+#define ADC_EXT_TIM2_TRGO		6
+#define ADC_EXT_TIM3_CH1		7
+#define ADC_EXT_TIM3_TRGO		8
+#define ADC_EXT_TIM4_CH4		9
+#define ADC_EXT_TIM5_CH1		10
+#define ADC_EXT_TIM5_CH2		11
+#define ADC_EXT_TIM5_CH3		12
+#define ADC_EXT_TIM8_CH1		13
+#define ADC_EXT_TIM8_TRGO		14
+#define ADC_EXT_EXTI_11			15
+
+#define ADC_JEXT_TIM1_CH4		0
+#define ADC_JEXT_TIM1_TRGO		1
+#define ADC_JEXT_TIM2_CH1		2
+#define ADC_JEXT_TIM2_TRGO		3
+#define ADC_JEXT_TIM3_CH2		4
+#define ADC_JEXT_TIM3_CH4		5
+#define ADC_JEXT_TIM4_CH1		6
+#define ADC_JEXT_TIM4_CH2		7
+#define ADC_JEXT_TIM4_CH3		8
+#define ADC_JEXT_TIM4_TRGO		9
+#define ADC_JEXT_TIM5_CH4		10
+#define ADC_JEXT_TIM5_TRGO		11
+#define ADC_JEXT_TIM8_CH2		12
+#define ADC_JEXT_TIM8_CH3		13
+#define ADC_JEXT_TIM8_CH4		14
+#define ADC_JEXT_EXTI_15		15
+
+
+/*
+ * EOC modes for scan readings
+ */
+#define ADC_EOC_ON_REG_SEQ		0
+#define ADC_EOC_ON_REG_CONV		1
+
 
 
 /******************* STATUS REGISTER FLAGS *****************/
