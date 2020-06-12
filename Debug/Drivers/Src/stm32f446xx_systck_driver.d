@@ -8,7 +8,8 @@ Drivers/Src/stm32f446xx_systck_driver.o: \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_spi_driver.h \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_usart_driver.h \
  C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_systck_driver.h \
- C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_adc_driver.h
+ C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_adc_driver.h \
+ C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_dma_driver.h
 
 C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_systck_driver.h:
 
@@ -27,3 +28,5 @@ C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/In
 C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_systck_driver.h:
 
 C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_adc_driver.h:
+
+C:/Users/rahul/Desktop/Dev_Projects/Embedded/stm32CubeIDE/stm32f446xx/Drivers/Inc/stm32f446xx_dma_driver.h:

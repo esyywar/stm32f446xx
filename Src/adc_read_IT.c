@@ -111,7 +111,7 @@ int main(void) {
 	Adc_Input.pDataBuffer = &value;
 
 	/* Begin continuous read from ADC */
-	ADC_Read_Reg_IT(&Adc_Input, ADC_IN0, ADC_SMP_3CYC, ADC_CONT_READ);
+	while(ADC_Read_Reg_IT(&Adc_Input, ADC_IN0, ADC_SMP_3CYC, ADC_CONT_READ) != ADC_READY);
 
 
 	while(1) {

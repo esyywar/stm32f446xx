@@ -234,6 +234,21 @@ void ADC_Scan_Reg(ADC_Handle_t *pADCxHandle, uint8_t NUM_CHAN, uint8_t *pSeqBuff
 }
 
 
+/*
+ * Function:	ADC_Read_Close
+ *
+ * Brief: 		End continuous read operation on an ADC channel.
+ *
+ * Params: 		struct ADC_Handle_t* *pADCx - ADC handle address
+ *
+ */
+void ADC_Cont_Close(ADC_Handle_t *pADCxHandle)
+{
+	ADC_OnOff(pADCxHandle->pADCx, DISABLE);
+	pADCxHandle->state = ADC_READY;
+}
+
+
 
 /************************************************ INTERRUPT CONFIG AND HANLDER APIS ****************************************/
 
@@ -287,50 +302,59 @@ void ADC_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority)
  * 				uint8_t ADC_DAQ_MODE - Take single reading or continuous mode
  *
  */
-void ADC_Read_Reg_IT(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_SMP_CYC, uint8_t ADC_DAQ_MODE)
+uint8_t ADC_Read_Reg_IT(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_SMP_CYC, uint8_t ADC_DAQ_MODE)
 {
-	// 1. Set the ADC On (Note: several steps b/w this and 'START' to allow stabilization time
-	ADC_OnOff(pADCxHandle->pADCx, ENABLE);
+	uint8_t state = pADCxHandle->state;
 
-	// 2. Disable scan mode
-	pADCxHandle->pADCx->CR1 &= ~(1 << 8);
-
-	// 3. Continuous or single read mode
-	if (ADC_DAQ_MODE == ADC_SINGLE_READ)
+	if (state == ADC_READY)
 	{
-		pADCxHandle->pADCx->CR2 &= ~(1 << 1);
+		pADCxHandle->state = ADC_BUSY_READ;
+
+		// 1. Set the ADC On (Note: several steps b/w this and 'START' to allow stabilization time
+		ADC_OnOff(pADCxHandle->pADCx, ENABLE);
+
+		// 2. Disable scan mode
+		pADCxHandle->pADCx->CR1 &= ~(1 << 8);
+
+		// 3. Continuous or single read mode
+		if (ADC_DAQ_MODE == ADC_SINGLE_READ)
+		{
+			pADCxHandle->pADCx->CR2 &= ~(1 << 1);
+		}
+		else if (ADC_DAQ_MODE == ADC_CONT_READ)
+		{
+			pADCxHandle->isContMode = ADC_CONT_MODE;
+			pADCxHandle->pADCx->CR2 |= (1 << 1);
+		}
+
+		// 4. Set number of channels in sequence to 1
+		pADCxHandle->pADCx->SQR[0] &= ~(0xF << 20);
+
+		// 5. Load the channel to be read
+		pADCxHandle->pADCx->SQR[2] = (ADC_CHAN << 0);
+
+		// 6. Number of sampling cycles
+		uint8_t temp1 = 1 - ADC_CHAN / 10, temp2 = ADC_CHAN % 9;
+		pADCxHandle->pADCx->SMPR[temp1] = (ADC_SMP_CYC << temp2);
+
+		// 7. Enable end of conversion interrupt
+		pADCxHandle->pADCx->CR1 |= (1 << 5);
+		ADC_IRQConfig(IRQ_POS_ADC, ENABLE);
+
+		// 8. Either set trigger or begin conversion
+		if (pADCxHandle->ADC_Config.ADC_Trig_Pol == ADC_EXTEN_DI)
+		{
+			// Start conversion of regular channels
+			pADCxHandle->pADCx->CR2 |= (1 << 30);
+		}
+		else
+		{
+			// Configure external trigger and trigger source
+			pADCxHandle->pADCx->CR2 |= (uint32_t)(pADCxHandle->ADC_Config.ADC_Trig_Pol << 28) | (uint32_t)(pADCxHandle->ADC_Config.ADC_Trig_Src << 24);
+		}
 	}
-	else if (ADC_DAQ_MODE == ADC_CONT_READ)
-	{
-		pADCxHandle->isContMode = ADC_CONT_MODE;
-		pADCxHandle->pADCx->CR2 |= (1 << 1);
-	}
 
-	// 4. Set number of channels in sequence to 1
-	pADCxHandle->pADCx->SQR[0] &= ~(0xF << 20);
-
-	// 5. Load the channel to be read
-	pADCxHandle->pADCx->SQR[2] = (ADC_CHAN << 0);
-
-	// 6. Number of sampling cycles
-	uint8_t temp1 = 1 - ADC_CHAN / 10, temp2 = ADC_CHAN % 9;
-	pADCxHandle->pADCx->SMPR[temp1] = (ADC_SMP_CYC << temp2);
-
-	// 7. Enable end of conversion interrupt
-	pADCxHandle->pADCx->CR1 |= (1 << 5);
-	ADC_IRQConfig(IRQ_POS_ADC, ENABLE);
-
-	// 8. Either set trigger or begin conversion
-	if (pADCxHandle->ADC_Config.ADC_Trig_Pol == ADC_EXTEN_DI)
-	{
-		// Start conversion of regular channels
-		pADCxHandle->pADCx->CR2 |= (1 << 30);
-	}
-	else
-	{
-		// Configure external trigger and trigger source
-		pADCxHandle->pADCx->CR2 |= (uint32_t)(pADCxHandle->ADC_Config.ADC_Trig_Pol << 28) | (uint32_t)(pADCxHandle->ADC_Config.ADC_Trig_Src << 24);
-	}
+	return state;
 }
 
 

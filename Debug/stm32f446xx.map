@@ -108,6 +108,7 @@ Discarded input sections
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_adc_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_adc_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_adc_driver.o
+ .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_adc_driver.o
  .text          0x0000000000000000        0x0 Drivers/Src/stm32f446xx_adc_driver.o
  .data          0x0000000000000000        0x0 Drivers/Src/stm32f446xx_adc_driver.o
  .bss           0x0000000000000000        0x0 Drivers/Src/stm32f446xx_adc_driver.o
@@ -115,16 +116,34 @@ Discarded input sections
                 0x0000000000000000       0x28 Drivers/Src/stm32f446xx_adc_driver.o
  .text.ADC_Scan_Reg
                 0x0000000000000000      0x1ac Drivers/Src/stm32f446xx_adc_driver.o
+ .text.ADC_Cont_Close
+                0x0000000000000000       0x22 Drivers/Src/stm32f446xx_adc_driver.o
  .text.ADC_IRQConfig
                 0x0000000000000000       0x7c Drivers/Src/stm32f446xx_adc_driver.o
  .text.ADC_IRQPriorityConfig
                 0x0000000000000000       0x50 Drivers/Src/stm32f446xx_adc_driver.o
  .text.ADC_Read_Reg_IT
-                0x0000000000000000      0x120 Drivers/Src/stm32f446xx_adc_driver.o
+                0x0000000000000000      0x134 Drivers/Src/stm32f446xx_adc_driver.o
  .text.ADC_EV_IRQHandling
                 0x0000000000000000       0xd2 Drivers/Src/stm32f446xx_adc_driver.o
  .text.ADC_Read_IT_Handle
                 0x0000000000000000       0x6a Drivers/Src/stm32f446xx_adc_driver.o
+ .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_dma_driver.o
+ .text          0x0000000000000000        0x0 Drivers/Src/stm32f446xx_dma_driver.o
+ .data          0x0000000000000000        0x0 Drivers/Src/stm32f446xx_dma_driver.o
+ .bss           0x0000000000000000        0x0 Drivers/Src/stm32f446xx_dma_driver.o
+ .debug_info    0x0000000000000000       0x21 Drivers/Src/stm32f446xx_dma_driver.o
+ .debug_abbrev  0x0000000000000000       0x13 Drivers/Src/stm32f446xx_dma_driver.o
+ .debug_aranges
+                0x0000000000000000       0x18 Drivers/Src/stm32f446xx_dma_driver.o
+ .debug_macro   0x0000000000000000       0x11 Drivers/Src/stm32f446xx_dma_driver.o
+ .debug_macro   0x0000000000000000      0xa60 Drivers/Src/stm32f446xx_dma_driver.o
+ .debug_line    0x0000000000000000       0x48 Drivers/Src/stm32f446xx_dma_driver.o
+ .debug_str     0x0000000000000000     0x2cfa Drivers/Src/stm32f446xx_dma_driver.o
+ .comment       0x0000000000000000       0x7c Drivers/Src/stm32f446xx_dma_driver.o
+ .ARM.attributes
+                0x0000000000000000       0x33 Drivers/Src/stm32f446xx_dma_driver.o
+ .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_gpio_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_gpio_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_gpio_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_gpio_driver.o
@@ -225,11 +244,13 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x35 Drivers/Src/stm32f446xx_gpio_driver.o
  .debug_macro   0x0000000000000000       0x20 Drivers/Src/stm32f446xx_gpio_driver.o
  .debug_macro   0x0000000000000000      0x1e1 Drivers/Src/stm32f446xx_gpio_driver.o
- .debug_macro   0x0000000000000000      0x515 Drivers/Src/stm32f446xx_gpio_driver.o
+ .debug_macro   0x0000000000000000      0x532 Drivers/Src/stm32f446xx_gpio_driver.o
  .debug_macro   0x0000000000000000      0x14e Drivers/Src/stm32f446xx_gpio_driver.o
  .debug_macro   0x0000000000000000      0x120 Drivers/Src/stm32f446xx_gpio_driver.o
  .debug_macro   0x0000000000000000      0x1c0 Drivers/Src/stm32f446xx_gpio_driver.o
  .debug_macro   0x0000000000000000       0x28 Drivers/Src/stm32f446xx_gpio_driver.o
+ .debug_macro   0x0000000000000000       0xc4 Drivers/Src/stm32f446xx_gpio_driver.o
+ .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_i2c_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_i2c_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_i2c_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_i2c_driver.o
@@ -330,12 +351,12 @@ Discarded input sections
                 0x0000000000000000       0x5c Drivers/Src/stm32f446xx_i2c_driver.o
  .text.I2C_CloseRx_IT
                 0x0000000000000000       0x70 Drivers/Src/stm32f446xx_i2c_driver.o
- .debug_info    0x0000000000000000     0x1311 Drivers/Src/stm32f446xx_i2c_driver.o
+ .debug_info    0x0000000000000000     0x132e Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_abbrev  0x0000000000000000      0x2f1 Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_aranges
                 0x0000000000000000       0xf0 Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_ranges  0x0000000000000000       0xe0 Drivers/Src/stm32f446xx_i2c_driver.o
- .debug_macro   0x0000000000000000      0x263 Drivers/Src/stm32f446xx_i2c_driver.o
+ .debug_macro   0x0000000000000000      0x26d Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_macro   0x0000000000000000      0xa60 Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_macro   0x0000000000000000       0x22 Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_macro   0x0000000000000000       0x40 Drivers/Src/stm32f446xx_i2c_driver.o
@@ -372,19 +393,21 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x35 Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_macro   0x0000000000000000       0x20 Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_macro   0x0000000000000000      0x1e1 Drivers/Src/stm32f446xx_i2c_driver.o
- .debug_macro   0x0000000000000000      0x515 Drivers/Src/stm32f446xx_i2c_driver.o
+ .debug_macro   0x0000000000000000      0x532 Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_macro   0x0000000000000000      0x18a Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_macro   0x0000000000000000      0x120 Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_macro   0x0000000000000000      0x1c0 Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_macro   0x0000000000000000       0x28 Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_macro   0x0000000000000000      0x24b Drivers/Src/stm32f446xx_i2c_driver.o
+ .debug_macro   0x0000000000000000       0xc4 Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_macro   0x0000000000000000      0x148 Drivers/Src/stm32f446xx_i2c_driver.o
- .debug_line    0x0000000000000000      0xab3 Drivers/Src/stm32f446xx_i2c_driver.o
- .debug_str     0x0000000000000000     0xc36e Drivers/Src/stm32f446xx_i2c_driver.o
+ .debug_line    0x0000000000000000      0xacf Drivers/Src/stm32f446xx_i2c_driver.o
+ .debug_str     0x0000000000000000     0xc650 Drivers/Src/stm32f446xx_i2c_driver.o
  .comment       0x0000000000000000       0x7c Drivers/Src/stm32f446xx_i2c_driver.o
  .debug_frame   0x0000000000000000      0x41c Drivers/Src/stm32f446xx_i2c_driver.o
  .ARM.attributes
                 0x0000000000000000       0x33 Drivers/Src/stm32f446xx_i2c_driver.o
+ .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_rcc_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_rcc_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_rcc_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_rcc_driver.o
@@ -467,13 +490,15 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x35 Drivers/Src/stm32f446xx_rcc_driver.o
  .debug_macro   0x0000000000000000       0x20 Drivers/Src/stm32f446xx_rcc_driver.o
  .debug_macro   0x0000000000000000      0x1e1 Drivers/Src/stm32f446xx_rcc_driver.o
- .debug_macro   0x0000000000000000      0x515 Drivers/Src/stm32f446xx_rcc_driver.o
+ .debug_macro   0x0000000000000000      0x532 Drivers/Src/stm32f446xx_rcc_driver.o
  .debug_macro   0x0000000000000000      0x184 Drivers/Src/stm32f446xx_rcc_driver.o
  .debug_macro   0x0000000000000000      0x14e Drivers/Src/stm32f446xx_rcc_driver.o
  .debug_macro   0x0000000000000000      0x120 Drivers/Src/stm32f446xx_rcc_driver.o
  .debug_macro   0x0000000000000000      0x1c0 Drivers/Src/stm32f446xx_rcc_driver.o
  .debug_macro   0x0000000000000000       0x28 Drivers/Src/stm32f446xx_rcc_driver.o
  .debug_macro   0x0000000000000000      0x24b Drivers/Src/stm32f446xx_rcc_driver.o
+ .debug_macro   0x0000000000000000       0xc4 Drivers/Src/stm32f446xx_rcc_driver.o
+ .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_spi_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_spi_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_spi_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_spi_driver.o
@@ -560,12 +585,12 @@ Discarded input sections
                 0x0000000000000000       0x7c Drivers/Src/stm32f446xx_spi_driver.o
  .text.SPI_ApplicationCallbackEvent
                 0x0000000000000000       0x16 Drivers/Src/stm32f446xx_spi_driver.o
- .debug_info    0x0000000000000000     0x1105 Drivers/Src/stm32f446xx_spi_driver.o
+ .debug_info    0x0000000000000000     0x1122 Drivers/Src/stm32f446xx_spi_driver.o
  .debug_abbrev  0x0000000000000000      0x2b7 Drivers/Src/stm32f446xx_spi_driver.o
  .debug_aranges
                 0x0000000000000000       0xb8 Drivers/Src/stm32f446xx_spi_driver.o
  .debug_ranges  0x0000000000000000       0xa8 Drivers/Src/stm32f446xx_spi_driver.o
- .debug_macro   0x0000000000000000      0x263 Drivers/Src/stm32f446xx_spi_driver.o
+ .debug_macro   0x0000000000000000      0x26d Drivers/Src/stm32f446xx_spi_driver.o
  .debug_macro   0x0000000000000000      0xa60 Drivers/Src/stm32f446xx_spi_driver.o
  .debug_macro   0x0000000000000000       0x22 Drivers/Src/stm32f446xx_spi_driver.o
  .debug_macro   0x0000000000000000       0x40 Drivers/Src/stm32f446xx_spi_driver.o
@@ -602,19 +627,21 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x35 Drivers/Src/stm32f446xx_spi_driver.o
  .debug_macro   0x0000000000000000       0x20 Drivers/Src/stm32f446xx_spi_driver.o
  .debug_macro   0x0000000000000000      0x1e1 Drivers/Src/stm32f446xx_spi_driver.o
- .debug_macro   0x0000000000000000      0x515 Drivers/Src/stm32f446xx_spi_driver.o
+ .debug_macro   0x0000000000000000      0x532 Drivers/Src/stm32f446xx_spi_driver.o
  .debug_macro   0x0000000000000000      0x18a Drivers/Src/stm32f446xx_spi_driver.o
  .debug_macro   0x0000000000000000      0x14e Drivers/Src/stm32f446xx_spi_driver.o
  .debug_macro   0x0000000000000000      0x1c0 Drivers/Src/stm32f446xx_spi_driver.o
  .debug_macro   0x0000000000000000       0x28 Drivers/Src/stm32f446xx_spi_driver.o
  .debug_macro   0x0000000000000000      0x24b Drivers/Src/stm32f446xx_spi_driver.o
+ .debug_macro   0x0000000000000000       0xc4 Drivers/Src/stm32f446xx_spi_driver.o
  .debug_macro   0x0000000000000000      0x11a Drivers/Src/stm32f446xx_spi_driver.o
- .debug_line    0x0000000000000000      0x917 Drivers/Src/stm32f446xx_spi_driver.o
- .debug_str     0x0000000000000000     0xc268 Drivers/Src/stm32f446xx_spi_driver.o
+ .debug_line    0x0000000000000000      0x933 Drivers/Src/stm32f446xx_spi_driver.o
+ .debug_str     0x0000000000000000     0xc54a Drivers/Src/stm32f446xx_spi_driver.o
  .comment       0x0000000000000000       0x7c Drivers/Src/stm32f446xx_spi_driver.o
  .debug_frame   0x0000000000000000      0x30c Drivers/Src/stm32f446xx_spi_driver.o
  .ARM.attributes
                 0x0000000000000000       0x33 Drivers/Src/stm32f446xx_spi_driver.o
+ .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_systck_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_systck_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_systck_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_systck_driver.o
@@ -672,7 +699,7 @@ Discarded input sections
  .debug_aranges
                 0x0000000000000000       0x30 Drivers/Src/stm32f446xx_systck_driver.o
  .debug_ranges  0x0000000000000000       0x20 Drivers/Src/stm32f446xx_systck_driver.o
- .debug_macro   0x0000000000000000      0x263 Drivers/Src/stm32f446xx_systck_driver.o
+ .debug_macro   0x0000000000000000      0x26d Drivers/Src/stm32f446xx_systck_driver.o
  .debug_macro   0x0000000000000000      0xa60 Drivers/Src/stm32f446xx_systck_driver.o
  .debug_macro   0x0000000000000000       0x22 Drivers/Src/stm32f446xx_systck_driver.o
  .debug_macro   0x0000000000000000       0x40 Drivers/Src/stm32f446xx_systck_driver.o
@@ -709,19 +736,21 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x35 Drivers/Src/stm32f446xx_systck_driver.o
  .debug_macro   0x0000000000000000       0x20 Drivers/Src/stm32f446xx_systck_driver.o
  .debug_macro   0x0000000000000000      0x1e1 Drivers/Src/stm32f446xx_systck_driver.o
- .debug_macro   0x0000000000000000      0x515 Drivers/Src/stm32f446xx_systck_driver.o
+ .debug_macro   0x0000000000000000      0x532 Drivers/Src/stm32f446xx_systck_driver.o
  .debug_macro   0x0000000000000000      0x18a Drivers/Src/stm32f446xx_systck_driver.o
  .debug_macro   0x0000000000000000      0x14e Drivers/Src/stm32f446xx_systck_driver.o
  .debug_macro   0x0000000000000000      0x120 Drivers/Src/stm32f446xx_systck_driver.o
  .debug_macro   0x0000000000000000      0x1c0 Drivers/Src/stm32f446xx_systck_driver.o
  .debug_macro   0x0000000000000000      0x24b Drivers/Src/stm32f446xx_systck_driver.o
+ .debug_macro   0x0000000000000000       0xc4 Drivers/Src/stm32f446xx_systck_driver.o
  .debug_macro   0x0000000000000000       0x22 Drivers/Src/stm32f446xx_systck_driver.o
- .debug_line    0x0000000000000000      0x720 Drivers/Src/stm32f446xx_systck_driver.o
- .debug_str     0x0000000000000000     0xbf20 Drivers/Src/stm32f446xx_systck_driver.o
+ .debug_line    0x0000000000000000      0x73c Drivers/Src/stm32f446xx_systck_driver.o
+ .debug_str     0x0000000000000000     0xc202 Drivers/Src/stm32f446xx_systck_driver.o
  .comment       0x0000000000000000       0x7c Drivers/Src/stm32f446xx_systck_driver.o
  .debug_frame   0x0000000000000000       0x78 Drivers/Src/stm32f446xx_systck_driver.o
  .ARM.attributes
                 0x0000000000000000       0x33 Drivers/Src/stm32f446xx_systck_driver.o
+ .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_usart_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_usart_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_usart_driver.o
  .group         0x0000000000000000        0xc Drivers/Src/stm32f446xx_usart_driver.o
@@ -826,12 +855,14 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x35 Drivers/Src/stm32f446xx_usart_driver.o
  .debug_macro   0x0000000000000000       0x20 Drivers/Src/stm32f446xx_usart_driver.o
  .debug_macro   0x0000000000000000      0x1e1 Drivers/Src/stm32f446xx_usart_driver.o
- .debug_macro   0x0000000000000000      0x515 Drivers/Src/stm32f446xx_usart_driver.o
+ .debug_macro   0x0000000000000000      0x532 Drivers/Src/stm32f446xx_usart_driver.o
  .debug_macro   0x0000000000000000      0x18a Drivers/Src/stm32f446xx_usart_driver.o
  .debug_macro   0x0000000000000000      0x14e Drivers/Src/stm32f446xx_usart_driver.o
  .debug_macro   0x0000000000000000      0x120 Drivers/Src/stm32f446xx_usart_driver.o
  .debug_macro   0x0000000000000000       0x28 Drivers/Src/stm32f446xx_usart_driver.o
  .debug_macro   0x0000000000000000      0x24b Drivers/Src/stm32f446xx_usart_driver.o
+ .debug_macro   0x0000000000000000       0xc4 Drivers/Src/stm32f446xx_usart_driver.o
+ .group         0x0000000000000000        0xc Src/adc_read_simple.o
  .group         0x0000000000000000        0xc Src/adc_read_simple.o
  .group         0x0000000000000000        0xc Src/adc_read_simple.o
  .group         0x0000000000000000        0xc Src/adc_read_simple.o
@@ -914,13 +945,14 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x35 Src/adc_read_simple.o
  .debug_macro   0x0000000000000000       0x20 Src/adc_read_simple.o
  .debug_macro   0x0000000000000000      0x1e1 Src/adc_read_simple.o
- .debug_macro   0x0000000000000000      0x515 Src/adc_read_simple.o
+ .debug_macro   0x0000000000000000      0x532 Src/adc_read_simple.o
  .debug_macro   0x0000000000000000      0x18a Src/adc_read_simple.o
  .debug_macro   0x0000000000000000      0x14e Src/adc_read_simple.o
  .debug_macro   0x0000000000000000      0x120 Src/adc_read_simple.o
  .debug_macro   0x0000000000000000      0x1c0 Src/adc_read_simple.o
  .debug_macro   0x0000000000000000       0x28 Src/adc_read_simple.o
  .debug_macro   0x0000000000000000      0x24b Src/adc_read_simple.o
+ .debug_macro   0x0000000000000000       0xc4 Src/adc_read_simple.o
  .group         0x0000000000000000        0xc Src/syscalls.o
  .group         0x0000000000000000        0xc Src/syscalls.o
  .group         0x0000000000000000        0xc Src/syscalls.o
@@ -1216,6 +1248,7 @@ LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
 LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/crtbegin.o
 LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/crt0.o
 LOAD Drivers/Src/stm32f446xx_adc_driver.o
+LOAD Drivers/Src/stm32f446xx_dma_driver.o
 LOAD Drivers/Src/stm32f446xx_gpio_driver.o
 LOAD Drivers/Src/stm32f446xx_i2c_driver.o
 LOAD Drivers/Src/stm32f446xx_rcc_driver.o
@@ -1712,127 +1745,128 @@ LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x00000000000004de       0x1e c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/crtn.o
 OUTPUT(stm32f446xx.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x5500
- .debug_info    0x0000000000000000     0x1065 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_info    0x0000000000001065     0x1050 Drivers/Src/stm32f446xx_gpio_driver.o
- .debug_info    0x00000000000020b5      0xc17 Drivers/Src/stm32f446xx_rcc_driver.o
- .debug_info    0x0000000000002ccc     0x1114 Drivers/Src/stm32f446xx_usart_driver.o
- .debug_info    0x0000000000003de0      0xde2 Src/adc_read_simple.o
- .debug_info    0x0000000000004bc2      0x91c Src/sysmem.o
- .debug_info    0x00000000000054de       0x22 Startup/startup_stm32f446retx.o
+.debug_info     0x0000000000000000     0x55b8
+ .debug_info    0x0000000000000000     0x10c6 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_info    0x00000000000010c6     0x106d Drivers/Src/stm32f446xx_gpio_driver.o
+ .debug_info    0x0000000000002133      0xc34 Drivers/Src/stm32f446xx_rcc_driver.o
+ .debug_info    0x0000000000002d67     0x1131 Drivers/Src/stm32f446xx_usart_driver.o
+ .debug_info    0x0000000000003e98      0xde2 Src/adc_read_simple.o
+ .debug_info    0x0000000000004c7a      0x91c Src/sysmem.o
+ .debug_info    0x0000000000005596       0x22 Startup/startup_stm32f446retx.o
 
-.debug_abbrev   0x0000000000000000      0xd79
- .debug_abbrev  0x0000000000000000      0x2e1 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_abbrev  0x00000000000002e1      0x258 Drivers/Src/stm32f446xx_gpio_driver.o
- .debug_abbrev  0x0000000000000539      0x1bc Drivers/Src/stm32f446xx_rcc_driver.o
- .debug_abbrev  0x00000000000006f5      0x2b7 Drivers/Src/stm32f446xx_usart_driver.o
- .debug_abbrev  0x00000000000009ac      0x200 Src/adc_read_simple.o
- .debug_abbrev  0x0000000000000bac      0x1bb Src/sysmem.o
- .debug_abbrev  0x0000000000000d67       0x12 Startup/startup_stm32f446retx.o
+.debug_abbrev   0x0000000000000000      0xd7b
+ .debug_abbrev  0x0000000000000000      0x2e3 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_abbrev  0x00000000000002e3      0x258 Drivers/Src/stm32f446xx_gpio_driver.o
+ .debug_abbrev  0x000000000000053b      0x1bc Drivers/Src/stm32f446xx_rcc_driver.o
+ .debug_abbrev  0x00000000000006f7      0x2b7 Drivers/Src/stm32f446xx_usart_driver.o
+ .debug_abbrev  0x00000000000009ae      0x200 Src/adc_read_simple.o
+ .debug_abbrev  0x0000000000000bae      0x1bb Src/sysmem.o
+ .debug_abbrev  0x0000000000000d69       0x12 Startup/startup_stm32f446retx.o
 
-.debug_aranges  0x0000000000000000      0x250
+.debug_aranges  0x0000000000000000      0x258
  .debug_aranges
-                0x0000000000000000       0x78 Drivers/Src/stm32f446xx_adc_driver.o
+                0x0000000000000000       0x80 Drivers/Src/stm32f446xx_adc_driver.o
  .debug_aranges
-                0x0000000000000078       0x78 Drivers/Src/stm32f446xx_gpio_driver.o
+                0x0000000000000080       0x78 Drivers/Src/stm32f446xx_gpio_driver.o
  .debug_aranges
-                0x00000000000000f0       0x30 Drivers/Src/stm32f446xx_rcc_driver.o
+                0x00000000000000f8       0x30 Drivers/Src/stm32f446xx_rcc_driver.o
  .debug_aranges
-                0x0000000000000120       0xa8 Drivers/Src/stm32f446xx_usart_driver.o
+                0x0000000000000128       0xa8 Drivers/Src/stm32f446xx_usart_driver.o
  .debug_aranges
-                0x00000000000001c8       0x40 Src/adc_read_simple.o
+                0x00000000000001d0       0x40 Src/adc_read_simple.o
  .debug_aranges
-                0x0000000000000208       0x20 Src/sysmem.o
+                0x0000000000000210       0x20 Src/sysmem.o
  .debug_aranges
-                0x0000000000000228       0x28 Startup/startup_stm32f446retx.o
+                0x0000000000000230       0x28 Startup/startup_stm32f446retx.o
 
-.debug_ranges   0x0000000000000000      0x1e8
- .debug_ranges  0x0000000000000000       0x68 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_ranges  0x0000000000000068       0x68 Drivers/Src/stm32f446xx_gpio_driver.o
- .debug_ranges  0x00000000000000d0       0x20 Drivers/Src/stm32f446xx_rcc_driver.o
- .debug_ranges  0x00000000000000f0       0x98 Drivers/Src/stm32f446xx_usart_driver.o
- .debug_ranges  0x0000000000000188       0x30 Src/adc_read_simple.o
- .debug_ranges  0x00000000000001b8       0x10 Src/sysmem.o
- .debug_ranges  0x00000000000001c8       0x20 Startup/startup_stm32f446retx.o
+.debug_ranges   0x0000000000000000      0x1f0
+ .debug_ranges  0x0000000000000000       0x70 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_ranges  0x0000000000000070       0x68 Drivers/Src/stm32f446xx_gpio_driver.o
+ .debug_ranges  0x00000000000000d8       0x20 Drivers/Src/stm32f446xx_rcc_driver.o
+ .debug_ranges  0x00000000000000f8       0x98 Drivers/Src/stm32f446xx_usart_driver.o
+ .debug_ranges  0x0000000000000190       0x30 Src/adc_read_simple.o
+ .debug_ranges  0x00000000000001c0       0x10 Src/sysmem.o
+ .debug_ranges  0x00000000000001d0       0x20 Startup/startup_stm32f446retx.o
 
-.debug_macro    0x0000000000000000     0x3f44
- .debug_macro   0x0000000000000000      0x263 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000000263      0xa60 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000000cc3       0x22 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000000ce5       0x40 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000000d25       0x18 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000000d3d       0x94 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000000dd1       0x3c Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000000e0d       0x34 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000000e41       0x16 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000000e57       0x57 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000000eae       0x97 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000000f45      0x330 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001275       0xfd Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001372       0x10 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001382       0x52 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x00000000000013d4       0x1f Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x00000000000013f3       0x43 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001436       0x20 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001456      0x1a3 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x00000000000015f9       0x10 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001609       0x6a Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001673       0x1c Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x000000000000168f       0x52 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x00000000000016e1       0x40 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001721       0x10 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001731       0x40 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001771       0xd7 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001848       0x1c Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001864       0x3d Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x00000000000018a1       0x16 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x00000000000018b7      0x145 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x00000000000019fc       0xef Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001aeb      0x1df Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001cca       0x16 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001ce0       0x35 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001d15       0x20 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001d35      0x1e1 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000001f16      0x515 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x000000000000242b      0x18a Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x00000000000025b5      0x14e Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000002703      0x120 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000002823      0x1c0 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x00000000000029e3       0x28 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000002a0b      0x245 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_macro   0x0000000000002c50      0x263 Drivers/Src/stm32f446xx_gpio_driver.o
- .debug_macro   0x0000000000002eb3      0x24b Drivers/Src/stm32f446xx_gpio_driver.o
- .debug_macro   0x00000000000030fe      0x184 Drivers/Src/stm32f446xx_gpio_driver.o
- .debug_macro   0x0000000000003282      0x263 Drivers/Src/stm32f446xx_rcc_driver.o
- .debug_macro   0x00000000000034e5      0x263 Drivers/Src/stm32f446xx_usart_driver.o
- .debug_macro   0x0000000000003748      0x1ba Drivers/Src/stm32f446xx_usart_driver.o
- .debug_macro   0x0000000000003902      0x259 Src/adc_read_simple.o
- .debug_macro   0x0000000000003b5b      0x1ae Src/sysmem.o
- .debug_macro   0x0000000000003d09      0x23b Src/sysmem.o
+.debug_macro    0x0000000000000000     0x4057
+ .debug_macro   0x0000000000000000      0x26d Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x000000000000026d      0xa60 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000000ccd       0x22 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000000cef       0x40 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000000d2f       0x18 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000000d47       0x94 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000000ddb       0x3c Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000000e17       0x34 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000000e4b       0x16 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000000e61       0x57 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000000eb8       0x97 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000000f4f      0x330 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x000000000000127f       0xfd Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x000000000000137c       0x10 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x000000000000138c       0x52 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x00000000000013de       0x1f Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x00000000000013fd       0x43 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000001440       0x20 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000001460      0x1a3 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000001603       0x10 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000001613       0x6a Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x000000000000167d       0x1c Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000001699       0x52 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x00000000000016eb       0x40 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x000000000000172b       0x10 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x000000000000173b       0x40 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x000000000000177b       0xd7 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000001852       0x1c Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x000000000000186e       0x3d Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x00000000000018ab       0x16 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x00000000000018c1      0x145 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000001a06       0xef Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000001af5      0x1df Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000001cd4       0x16 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000001cea       0x35 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000001d1f       0x20 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000001d3f      0x1e1 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000001f20      0x532 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000002452      0x18a Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x00000000000025dc      0x14e Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x000000000000272a      0x120 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x000000000000284a      0x1c0 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000002a0a       0x28 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000002a32       0xc4 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000002af6      0x245 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_macro   0x0000000000002d3b      0x26d Drivers/Src/stm32f446xx_gpio_driver.o
+ .debug_macro   0x0000000000002fa8      0x24b Drivers/Src/stm32f446xx_gpio_driver.o
+ .debug_macro   0x00000000000031f3      0x184 Drivers/Src/stm32f446xx_gpio_driver.o
+ .debug_macro   0x0000000000003377      0x26d Drivers/Src/stm32f446xx_rcc_driver.o
+ .debug_macro   0x00000000000035e4      0x26d Drivers/Src/stm32f446xx_usart_driver.o
+ .debug_macro   0x0000000000003851      0x1ba Drivers/Src/stm32f446xx_usart_driver.o
+ .debug_macro   0x0000000000003a0b      0x263 Src/adc_read_simple.o
+ .debug_macro   0x0000000000003c6e      0x1ae Src/sysmem.o
+ .debug_macro   0x0000000000003e1c      0x23b Src/sysmem.o
 
-.debug_line     0x0000000000000000     0x2f01
- .debug_line    0x0000000000000000      0x864 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_line    0x0000000000000864      0x885 Drivers/Src/stm32f446xx_gpio_driver.o
- .debug_line    0x00000000000010e9      0x725 Drivers/Src/stm32f446xx_rcc_driver.o
- .debug_line    0x000000000000180e      0x9ca Drivers/Src/stm32f446xx_usart_driver.o
- .debug_line    0x00000000000021d8      0x74c Src/adc_read_simple.o
- .debug_line    0x0000000000002924      0x559 Src/sysmem.o
- .debug_line    0x0000000000002e7d       0x84 Startup/startup_stm32f446retx.o
+.debug_line     0x0000000000000000     0x2fa3
+ .debug_line    0x0000000000000000      0x896 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_line    0x0000000000000896      0x8a1 Drivers/Src/stm32f446xx_gpio_driver.o
+ .debug_line    0x0000000000001137      0x741 Drivers/Src/stm32f446xx_rcc_driver.o
+ .debug_line    0x0000000000001878      0x9e6 Drivers/Src/stm32f446xx_usart_driver.o
+ .debug_line    0x000000000000225e      0x768 Src/adc_read_simple.o
+ .debug_line    0x00000000000029c6      0x559 Src/sysmem.o
+ .debug_line    0x0000000000002f1f       0x84 Startup/startup_stm32f446retx.o
 
-.debug_str      0x0000000000000000     0xca22
- .debug_str     0x0000000000000000     0xbf27 Drivers/Src/stm32f446xx_adc_driver.o
-                                       0xc202 (size before relaxing)
- .debug_str     0x000000000000bf27      0x224 Drivers/Src/stm32f446xx_gpio_driver.o
-                                       0xc240 (size before relaxing)
- .debug_str     0x000000000000c14b       0xb9 Drivers/Src/stm32f446xx_rcc_driver.o
-                                       0xc059 (size before relaxing)
- .debug_str     0x000000000000c204      0x2a6 Drivers/Src/stm32f446xx_usart_driver.o
-                                       0xc2cb (size before relaxing)
- .debug_str     0x000000000000c4aa       0x8e Src/adc_read_simple.o
-                                       0xc158 (size before relaxing)
- .debug_str     0x000000000000c538      0x4b9 Src/sysmem.o
+.debug_str      0x0000000000000000     0xcd09
+ .debug_str     0x0000000000000000     0xc20e Drivers/Src/stm32f446xx_adc_driver.o
+                                       0xc4ef (size before relaxing)
+ .debug_str     0x000000000000c20e      0x224 Drivers/Src/stm32f446xx_gpio_driver.o
+                                       0xc522 (size before relaxing)
+ .debug_str     0x000000000000c432       0xb9 Drivers/Src/stm32f446xx_rcc_driver.o
+                                       0xc33b (size before relaxing)
+ .debug_str     0x000000000000c4eb      0x2a6 Drivers/Src/stm32f446xx_usart_driver.o
+                                       0xc5ad (size before relaxing)
+ .debug_str     0x000000000000c791       0x8e Src/adc_read_simple.o
+                                       0xc436 (size before relaxing)
+ .debug_str     0x000000000000c81f      0x4b9 Src/sysmem.o
                                        0x7ae0 (size before relaxing)
- .debug_str     0x000000000000c9f1       0x31 Startup/startup_stm32f446retx.o
+ .debug_str     0x000000000000ccd8       0x31 Startup/startup_stm32f446retx.o
                                          0x7d (size before relaxing)
 
 .comment        0x0000000000000000       0x7b
@@ -1844,27 +1878,27 @@ OUTPUT(stm32f446xx.elf elf32-littlearm)
  .comment       0x000000000000007b       0x7c Src/adc_read_simple.o
  .comment       0x000000000000007b       0x7c Src/sysmem.o
 
-.debug_frame    0x0000000000000000      0xbf4
- .debug_frame   0x0000000000000000      0x1d0 Drivers/Src/stm32f446xx_adc_driver.o
- .debug_frame   0x00000000000001d0      0x1f0 Drivers/Src/stm32f446xx_gpio_driver.o
- .debug_frame   0x00000000000003c0       0x78 Drivers/Src/stm32f446xx_rcc_driver.o
- .debug_frame   0x0000000000000438      0x2c0 Drivers/Src/stm32f446xx_usart_driver.o
- .debug_frame   0x00000000000006f8       0xb0 Src/adc_read_simple.o
- .debug_frame   0x00000000000007a8       0x34 Src/sysmem.o
- .debug_frame   0x00000000000007dc       0x20 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-errno.o)
- .debug_frame   0x00000000000007fc       0x2c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-init.o)
- .debug_frame   0x0000000000000828       0x6c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-sprintf.o)
- .debug_frame   0x0000000000000894       0x90 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-nano-svfprintf.o)
- .debug_frame   0x0000000000000924       0x60 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-nano-vfprintf_i.o)
- .debug_frame   0x0000000000000984       0x28 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-memcpy-stub.o)
- .debug_frame   0x00000000000009ac       0x28 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-memmove.o)
- .debug_frame   0x00000000000009d4       0x38 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-nano-freer.o)
- .debug_frame   0x0000000000000a0c       0x2c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-nano-mallocr.o)
- .debug_frame   0x0000000000000a38       0x3c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-nano-reallocr.o)
- .debug_frame   0x0000000000000a74       0x2c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-sbrkr.o)
- .debug_frame   0x0000000000000aa0       0x30 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-mlock.o)
- .debug_frame   0x0000000000000ad0       0x20 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-nano-msizer.o)
- .debug_frame   0x0000000000000af0       0x5c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-reent.o)
- .debug_frame   0x0000000000000b4c       0x4c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m\libgcc.a(_arm_addsubsf3.o)
- .debug_frame   0x0000000000000b98       0x38 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m\libgcc.a(_arm_muldivsf3.o)
- .debug_frame   0x0000000000000bd0       0x24 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m\libgcc.a(_arm_fixunssfsi.o)
+.debug_frame    0x0000000000000000      0xc18
+ .debug_frame   0x0000000000000000      0x1f4 Drivers/Src/stm32f446xx_adc_driver.o
+ .debug_frame   0x00000000000001f4      0x1f0 Drivers/Src/stm32f446xx_gpio_driver.o
+ .debug_frame   0x00000000000003e4       0x78 Drivers/Src/stm32f446xx_rcc_driver.o
+ .debug_frame   0x000000000000045c      0x2c0 Drivers/Src/stm32f446xx_usart_driver.o
+ .debug_frame   0x000000000000071c       0xb0 Src/adc_read_simple.o
+ .debug_frame   0x00000000000007cc       0x34 Src/sysmem.o
+ .debug_frame   0x0000000000000800       0x20 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-errno.o)
+ .debug_frame   0x0000000000000820       0x2c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-init.o)
+ .debug_frame   0x000000000000084c       0x6c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-sprintf.o)
+ .debug_frame   0x00000000000008b8       0x90 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-nano-svfprintf.o)
+ .debug_frame   0x0000000000000948       0x60 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .debug_frame   0x00000000000009a8       0x28 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x00000000000009d0       0x28 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-memmove.o)
+ .debug_frame   0x00000000000009f8       0x38 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-nano-freer.o)
+ .debug_frame   0x0000000000000a30       0x2c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x0000000000000a5c       0x3c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-nano-reallocr.o)
+ .debug_frame   0x0000000000000a98       0x2c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x0000000000000ac4       0x30 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-mlock.o)
+ .debug_frame   0x0000000000000af4       0x20 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-nano-msizer.o)
+ .debug_frame   0x0000000000000b14       0x5c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc_nano.a(lib_a-reent.o)
+ .debug_frame   0x0000000000000b70       0x4c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m\libgcc.a(_arm_addsubsf3.o)
+ .debug_frame   0x0000000000000bbc       0x38 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m\libgcc.a(_arm_muldivsf3.o)
+ .debug_frame   0x0000000000000bf4       0x24 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m\libgcc.a(_arm_fixunssfsi.o)

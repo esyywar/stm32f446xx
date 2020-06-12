@@ -113,6 +113,9 @@
 
 #define RCC_BASEADDR		(AHB1_BASEADDR + 0x3800)
 
+#define DMA1_BASEADDR		(AHB1_BASEADDR + 0x6000)
+#define DMA2_BASEADDR		(AHB1_BASEADDR + 0x6400)
+
 
 /*
  * GPIO register offsets
@@ -158,6 +161,7 @@ typedef struct {
 	__vo uint32_t AFR[2];			/* [0] GPIO alternate function low register - OFFSET 0x20, [1] GPIO alternate function high register - OFFSET 0x24 */
 } GPIO_RegDef_t;
 
+
 /* SPI register */
 typedef struct {
 	__vo uint32_t CR1;				/* SPI control register 1 - OFFSET 0x00 */
@@ -170,6 +174,7 @@ typedef struct {
 	__vo uint32_t I2SCFGR;			/* SPI_I2S configuration register - OFFSET 0x1C */
 	__vo uint32_t I2SPR;			/* SPI_I2S prescaler register - OFFSET 0x20 */
 } SPI_RegDef_t;
+
 
 /* I2C register */
 typedef struct {
@@ -185,6 +190,7 @@ typedef struct {
 	__vo uint32_t FLTR;				/* I2C FLTR register - OFFSET 0x24 */
 } I2C_RegDef_t;
 
+
 /* UART / USART register */
 typedef struct {
 	__vo uint32_t SR;				/* USART Status register - OFFSET 0x00 */
@@ -195,6 +201,7 @@ typedef struct {
 	__vo uint32_t CR3;				/* USART Control register 3 - OFFSET 0x14 */
 	__vo uint32_t GTPR;				/* USART Guard time and prescaler register - OFFSET 0x18 */
 } USART_RegDef_t;
+
 
 /* ADC register */
 typedef struct {
@@ -211,12 +218,34 @@ typedef struct {
 	__vo uint32_t DR;				/* ADC regular data register - OFFSET 0x4C */
 } ADC_RegDef_t;
 
+
 /* ADC Common register */
 typedef struct {
 	__vo uint32_t CSR;				/* ADC Common status register - OFFSET 0x00 */
 	__vo uint32_t CCR;				/* ADC common control register - OFFSET 0x04 */
 	__vo uint32_t CDR;				/* ADC common regular data register for dual and triple modes - OFFSET 0x08 */
 } ADC_Comm_RegDef_t;
+
+
+/* DMA Stream register */
+typedef struct {
+	__vo uint32_t SCR;				/* DMA stream x configuration register - OFFSET 0x10 + 0x18 * stream number */
+	__vo uint32_t SNDTR;			/* DMA stream x number of data register - OFFSET 0x14 + 0x18 * stream number */
+	__vo uint32_t SPAR;				/* DMA stream x peripheral address register - OFFSET 0x18 + 0x18 * stream number */
+	__vo uint32_t SM0AR;			/* DMA stream x memory 0 address register - OFFSET 0x1C + 0x18 * stream number */
+	__vo uint32_t SM1AR;			/* DMA stream x memory 1 address register - OFFSET 0x20 + 0x18 * stream number */
+	__vo uint32_t SFCR;				/* DMA stream x FIFO control register - OFFSET 0x24 + 0x18 * stream number */
+} DMA_Strm_RegDef_t;
+
+
+/* DMA register */
+typedef struct {
+	__vo uint32_t LISR;						/* DMA low interrupt status register - OFFSET 0x00 */
+	__vo uint32_t HISR;						/* DMA high interrupt status register - OFFSET 0x04 */
+	__vo uint32_t LIFCR;					/* DMA low interrupt flag clear register - OFFSET 0x08 */
+	__vo uint32_t HIFCR;					/* DMA high interrupt flag clear register - OFFSET 0x0C */
+	__vo DMA_Strm_RegDef_t DMA_Strm[8];		/* DMA stream registers (8 streams for each DMA) - OFFSET 0x10 */
+} DMA_RegDef_t;
 
 
 /* RCC register */
@@ -257,6 +286,7 @@ typedef struct {
 	__vo uint32_t DCKCFGR2;			/* RCC dedicated clocks configuration register 2 - OFFSET 0x94 */
 } RCC_RegDef_t;
 
+
 /* SYSCFG register */
 typedef struct {
 	__vo uint32_t MEMRMP;			/* SYSCFG memory remap register - OFFSET 0x00 */
@@ -268,6 +298,7 @@ typedef struct {
 	__vo uint32_t CFGR;				/* SYSCFG configuration register - OFFSET 0x2C */
 } SYSCFG_RegDef_t;
 
+
 /* EXTI register */
 typedef struct {
 	__vo uint32_t IMR;				/* Interrupt mask register - OFFSET 0x00 */
@@ -278,20 +309,24 @@ typedef struct {
 	__vo uint32_t PR;				/* Pending register - 0x14 */
 } EXTI_RegDef_t;
 
+
 /* NVIC ISER register */
 typedef struct {
 	__vo uint32_t ISER[8];			/* NVIC interrupt set-enable register - OFFSET 0x00 */
 } NVIC_ISER_RegDef_t;
+
 
 /* NVIC ICER register */
 typedef struct {
 	__vo uint32_t ICER[8];			/* NVIC interrupt clear-enable register - OFFSET 0x00 */
 } NVIC_ICER_RegDef_t;
 
+
 /* NVIC IPR register */
 typedef struct {
 	__vo uint32_t IPR[60];			/* NVIC interrupt priority register - OFFSET 0x00 */
 } NVIC_IPR_RegDef_t;
+
 
 /* NVIC SYSTCK register */
 typedef struct {
@@ -334,6 +369,9 @@ typedef struct {
 #define ADC2			((ADC_RegDef_t*)(ADC2_BASEADDR))
 #define ADC3			((ADC_RegDef_t*)(ADC3_BASEADDR))
 #define ADC_COMM		((ADC_Comm_RegDef_t*)(ADC_COMM_BASEADDR))
+
+#define DMA1			((DMA_RegDef_t*)(DMA1_BASEADDR))
+#define DMA2			((DMA_RegDef_t*)(DMA2_BASEADDR))
 
 #define RCC				((RCC_RegDef_t*)(RCC_BASEADDR))
 
@@ -544,6 +582,7 @@ typedef struct {
 #include "stm32f446xx_usart_driver.h"
 #include "stm32f446xx_systck_driver.h"
 #include "stm32f446xx_adc_driver.h"
+#include "stm32f446xx_dma_driver.h"
 
 
 #endif /* INC_STM32F446XX_H_ */
