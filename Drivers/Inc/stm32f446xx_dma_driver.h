@@ -51,12 +51,29 @@ typedef struct {
  */
 void DMA_PeriClockControl(DMA_RegDef_t *pDMAx, uint8_t EnOrDi);
 
+
 /*
  * Initialize and reset DMA
  */
 void DMA_Init(DMA_Handle_t *pDMAxHandle);
 void DMA_DeInit(DMA_RegDef_t *pDMAx);
 
+/*
+ * Start DMA transfer
+ */
+void DMA_Start(DMA_Handle_t *pDMAxHandle, uint32_t *pSrcAddr, uint32_t *pDestArrd, uint16_t dataLen);
+
+
+/*
+ * DMA Interrupt Configuration
+ */
+void DMA_IRQConfig(uint8_t IRQNumber, uint8_t EnOrDi);
+void DMA_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
+
+/*
+ * Read flag status from the SR
+ */
+uint8_t DMA_GetFlagStatus(DMA_Handle_t *pDMAxHandle, uint8_t DMA_FLAG);
 
 
 /************************* CONFIGURATION VALUES *****************************/
@@ -147,6 +164,14 @@ void DMA_DeInit(DMA_RegDef_t *pDMAx);
 #define DMA_STREAM_6				6
 #define DMA_STREAM_7				7
 
+
+/******************* STATUS REGISTER FLAGS *****************/
+
+#define DMA_FLAG_FEIF			0
+#define DMA_FLAG_DMEIF			1
+#define DMA_FLAG_TEIF			2
+#define DMA_FLAG_HTIF			3
+#define DMA_FLAG_TCIF			4
 
 
 #endif /* INC_STM32F446XX_DMA_DRIVER_H_ */

@@ -1,3 +1,7 @@
-stm32f446xx_dma_driver.c:24:6:DMA_PeriClockControl	16	static
-stm32f446xx_dma_driver.c:59:6:DMA_Init	24	static
-stm32f446xx_dma_driver.c:116:6:DMA_DeInit	16	static
+stm32f446xx_dma_driver.c:39:6:DMA_PeriClockControl	16	static
+stm32f446xx_dma_driver.c:66:13:DMA_StartStop	24	static
+stm32f446xx_dma_driver.c:89:6:DMA_Init	24	static
+stm32f446xx_dma_driver.c:145:6:DMA_DeInit	16	static
+stm32f446xx_dma_driver.c:158:6:DMA_Start	32	static
+stm32f446xx_dma_driver.c:205:6:DMA_IRQConfig	16	static
+stm32f446xx_dma_driver.c:227:6:DMA_IRQPriorityConfig	24	static

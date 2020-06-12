@@ -1,7 +1,7 @@
 stm32f446xx_adc_driver.c:28:6:ADC_PeriClockControl	16	static
-stm32f446xx_adc_driver.c:71:6:ADC_Init	16	static
-stm32f446xx_adc_driver.c:90:6:ADC_DeInit	4	static
-stm32f446xx_adc_driver.c:105:13:ADC_OnOff	16	static
+stm32f446xx_adc_driver.c:72:13:ADC_OnOff	16	static
+stm32f446xx_adc_driver.c:93:6:ADC_Init	16	static
+stm32f446xx_adc_driver.c:112:6:ADC_DeInit	4	static
 stm32f446xx_adc_driver.c:127:9:ADC_GetFlagStatus	16	static
 stm32f446xx_adc_driver.c:144:10:ADC_Read_Reg	24	static
 stm32f446xx_adc_driver.c:193:6:ADC_Scan_Reg	40	static

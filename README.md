@@ -12,7 +12,8 @@ I am programming these drivers myself to better understand the ARM micocontrolle
 - [x] UART/USART
 - [x] SYSTCK (System Timer)
 - [ ] Timers
-- [ ] ADC
+- [x] ADC
+- [x] DMA
 
 ### Driver Code
 Navigate to ./Drivers to see the driver source code and header files for each peripheral.

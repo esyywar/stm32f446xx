@@ -558,15 +558,38 @@ typedef struct {
 #define IRQ_POS_UART5			53
 #define IRQ_POS_USART6			71
 
+
 /*
  * ADC global interrupts
  */
 #define IRQ_POS_ADC				18
 
+
+/*
+ * DMA global interrupts
+ */
+#define IRQ_DMA1_STREAM0		11
+#define IRQ_DMA1_STREAM1		12
+#define IRQ_DMA1_STREAM2		13
+#define IRQ_DMA1_STREAM3		14
+#define IRQ_DMA1_STREAM4		15
+#define IRQ_DMA1_STREAM5		16
+#define IRQ_DMA1_STREAM6		17
+#define IRQ_DMA1_STREAM7		47
+
+#define IRQ_DMA2_STREAM0		56
+#define IRQ_DMA2_STREAM1		57
+#define IRQ_DMA2_STREAM2		58
+#define IRQ_DMA2_STREAM3		59
+#define IRQ_DMA2_STREAM4		60
+#define IRQ_DMA2_STREAM5		68
+#define IRQ_DMA2_STREAM6		69
+#define IRQ_DMA2_STREAM7		70
+
+
 /*
  * IRQ priority macros
  */
-
 #define IRQ_PRIORITY_1			1
 #define IRQ_PRIORITY_2			2
 #define IRQ_PRIORITY_3			3

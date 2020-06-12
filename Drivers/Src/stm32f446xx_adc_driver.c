@@ -61,6 +61,28 @@ void ADC_PeriClockControl(ADC_RegDef_t *pADCx, uint8_t EnOrDi)
 
 
 /*
+ * Function:	ADC_OnOff
+ *
+ * Brief: 		Turn the ADC on or put in low power mode
+ *
+ * Params:		ADC_RegDef_t *pADCx - ADC base address
+ * 				uint8_t EnOrDi - On or Off
+ *
+ */
+static void ADC_OnOff(ADC_RegDef_t *pADCx, uint8_t EnOrDi)
+{
+	if (EnOrDi == ENABLE)
+	{
+		pADCx->CR2 |= (1 << 0);
+	}
+	else
+	{
+		pADCx->CR2 &= ~(1 << 0);
+	}
+}
+
+
+/*
  * Function:	ADC_Init
  *
  * Brief: 		Initialize the ADC peripherals
@@ -90,28 +112,6 @@ void ADC_Init(ADC_Handle_t *pADCxHandle)
 void ADC_DeInit()
 {
 	ADC_RESET();
-}
-
-
-/*
- * Function:	ADC_OnOff
- *
- * Brief: 		Turn the ADC on or put in low power mode
- *
- * Params:		ADC_RegDef_t *pADCx - ADC base address
- * 				uint8_t EnOrDi - On or Off
- *
- */
-static void ADC_OnOff(ADC_RegDef_t *pADCx, uint8_t EnOrDi)
-{
-	if (EnOrDi == ENABLE)
-	{
-		pADCx->CR2 |= (1 << 0);
-	}
-	else
-	{
-		pADCx->CR2 &= ~(1 << 0);
-	}
 }
 
 
