@@ -17,6 +17,8 @@ typedef struct {
 	uint8_t DMA_Dir;
 	uint8_t DMA_PeriphInc;
 	uint8_t DMA_MemInc;
+	uint8_t DMA_PeriphDataSize;
+	uint8_t DMA_MemDataSize;
 	uint8_t DMA_CircMode;
 	uint8_t DMA_Priority;
 	uint8_t DMA_FIFOMode;
@@ -31,12 +33,15 @@ typedef struct {
 typedef struct {
 	DMA_RegDef_t *pDMAx;
 	DMA_Config_t DMA_Config;
+	uint8_t DMA_Stream;
 } DMA_Handle_t;
 
 
-/********************* ADC RESET MACROS *********************/
+/********************* DMA RESET MACROS *********************/
 
-// TODO
+#define DMA1_RESET()		do { (RCC->AHB1RSTR |= (1 << 21)); (RCC->AHB1RSTR |= ~(1 << 21)); } while(0)
+#define DMA2_RESET()		do { (RCC->AHB1RSTR |= (1 << 22)); (RCC->AHB1RSTR |= ~(1 << 22)); } while(0)
+
 
 
 /************************ DRIVER APIS ************************/
@@ -44,7 +49,14 @@ typedef struct {
 /*
  * Peripheral clock setup
  */
-void ADC_PeriClockControl(ADC_RegDef_t *pADCx, uint8_t EnOrDi);
+void DMA_PeriClockControl(DMA_RegDef_t *pDMAx, uint8_t EnOrDi);
+
+/*
+ * Initialize and reset DMA
+ */
+void DMA_Init(DMA_Handle_t *pDMAxHandle);
+void DMA_DeInit(DMA_RegDef_t *pDMAx);
+
 
 
 /************************* CONFIGURATION VALUES *****************************/
@@ -81,6 +93,13 @@ void ADC_PeriClockControl(ADC_RegDef_t *pADCx, uint8_t EnOrDi);
 #define DMA_MEM_INC					1
 
 /*
+ * Data size
+ */
+#define DMA_DATASIZE_BYTE			0
+#define DMA_DATASIZE_HALFWORD		1
+#define DMA_DATASIZE_WORD			2
+
+/*
  * Circular mode
  */
 #define DMA_CIRC_DI					0
@@ -115,6 +134,19 @@ void ADC_PeriClockControl(ADC_RegDef_t *pADCx, uint8_t EnOrDi);
 #define DMA_BURST_INCR4				1
 #define DMA_BURST_INCR8				2
 #define DMA_BURST_INCR16			3
+
+/*
+ * DMA Stream
+ */
+#define DMA_STREAM_0				0
+#define DMA_STREAM_1				1
+#define DMA_STREAM_2				2
+#define DMA_STREAM_3				3
+#define DMA_STREAM_4				4
+#define DMA_STREAM_5				5
+#define DMA_STREAM_6				6
+#define DMA_STREAM_7				7
+
 
 
 #endif /* INC_STM32F446XX_DMA_DRIVER_H_ */

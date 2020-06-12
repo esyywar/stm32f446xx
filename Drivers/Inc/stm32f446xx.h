@@ -437,6 +437,13 @@ typedef struct {
 #define ADC3_PCLK_EN() 		(RCC->APB2ENR |= (1 << 10))
 
 /*
+ * Clock enable macros for DMA
+ */
+#define DMA1_PCLK_EN()		(RCC->AHB1ENR |= (1 << 21))
+#define DMA2_PCLK_EN()		(RCC->AHB1ENR |= (1 << 22))
+
+
+/*
  * Clock enable macro for SYSCFG
  */
 #define SYSCFG_PCLK_EN()	(RCC->APB2ENR |= (1 << 14))
@@ -487,6 +494,12 @@ typedef struct {
 #define ADC1_PCLK_DI() 		(RCC->APB2ENR &= ~(1 << 8))
 #define ADC2_PCLK_DI() 		(RCC->APB2ENR &= ~(1 << 9))
 #define ADC3_PCLK_DI() 		(RCC->APB2ENR &= ~(1 << 10))
+
+/*
+ * Clock disable macros for DMA
+ */
+#define DMA1_PCLK_DI()		(RCC->AHB1ENR &= ~(1 << 21))
+#define DMA2_PCLK_DI()		(RCC->AHB1ENR &= ~(1 << 22))
 
 /*
  * Clock enable macro for SYSCFG
