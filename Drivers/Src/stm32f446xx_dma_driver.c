@@ -11,11 +11,11 @@
 
 /***************************** SHIFT VALUES FOR INTERRUPT FLAGS IN DMA SR (LISR AND HISR) ***************************/
 
-uint8_t TCIF_Flag[4] = {5, 11, 21, 27};
-uint8_t HTIF_Flag[4] = {4, 10, 20, 26};
-uint8_t TEIF_Flag[4] = {3, 9, 19, 25};
-uint8_t DMEIF_Flag[4] = {2, 8, 18, 24};
 uint8_t FEIF_Flag[4] = {0, 6, 16, 22};
+uint8_t DMEIF_Flag[4] = {2, 8, 18, 24};
+uint8_t TEIF_Flag[4] = {3, 9, 19, 25};
+uint8_t HTIF_Flag[4] = {4, 10, 20, 26};
+uint8_t TCIF_Flag[4] = {5, 11, 21, 27};
 
 
 /****************************** LOCAL FUNCTIONS *******************************/
@@ -155,6 +155,52 @@ void DMA_DeInit(DMA_RegDef_t *pDMAx)
 }
 
 
+/*
+ * Function:	DMA_GetFlagStatus
+ *
+ * Brief: 		Check status register of DMA to see if flag is set
+ *
+ * Params: 		struct ADC_RegDef_t *pADCx - ADC base address
+ * 				uint8_t ADC_FLAG - flag being checked
+ *
+ */
+uint8_t DMA_GetFlagStatus(DMA_Handle_t *pDMAxHandle, uint8_t DMA_FLAG)
+{
+	uint8_t streamNum = pDMAxHandle->DMA_Stream;
+	uint8_t temp = streamNum % 4;
+	uint32_t statusReg = (streamNum < 4) ? (pDMAxHandle->pDMAx->LISR) : (pDMAxHandle->pDMAx->HISR);
+
+	switch (DMA_FLAG)
+	{
+		case DMA_FLAG_FEIF:
+		{
+			return (statusReg & (1 << FEIF_Flag[temp]));
+		}
+		case DMA_FLAG_DMEIF:
+		{
+			return (statusReg & (1 << DMEIF_Flag[temp]));
+		}
+		case DMA_FLAG_TEIF:
+		{
+			return (statusReg & (1 << TEIF_Flag[temp]));
+		}
+		case DMA_FLAG_HTIF:
+		{
+			return (statusReg & (1 << HTIF_Flag[temp]));
+		}
+		case DMA_FLAG_TCIF:
+		{
+			return (statusReg & (1 << TCIF_Flag[temp]));
+		}
+		default:
+		{
+			return 0;
+		}
+	}
+}
+
+
+
 void DMA_Start(DMA_Handle_t *pDMAxHandle, uint32_t *pSrcAddr, uint32_t *pDestArrd, uint16_t dataLen)
 {
 	uint8_t streamNum = pDMAxHandle->DMA_Stream;
@@ -178,14 +224,7 @@ void DMA_Start(DMA_Handle_t *pDMAxHandle, uint32_t *pSrcAddr, uint32_t *pDestArr
 	DMA_StartStop(pDMAxHandle, ENABLE);
 
 	// 4. Wait till transfer complete - wait for transfer complete flag
-	if (streamNum > 3)
-	{
-		// GET FLAG
-	}
-	else
-	{
-		// GET FLAG
-	}
+	DMA_GetFlagStatus(pDMAxHandle, DMA_FLAG_TCIF);
 }
 
 
@@ -229,5 +268,30 @@ void DMA_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority)
 	uint8_t shift = 8 * (IRQNumber % 4) + NVIC_NONIMPL_LOW_BITS;
 	NVIC_IPR->IPR[IRQNumber / 4] |= (IRQPriority << shift);
 }
+
+
+void DMA_Start_IT(DMA_Handle_t *pDMAxHandle, uint32_t *pSrcAddr, uint32_t *pDestArrd, uint16_t dataLen)
+{
+	uint8_t streamNum = pDMAxHandle->DMA_Stream;
+
+	// 1. Set the source and destination address depending on direction
+	if (pDMAxHandle->DMA_Config.DMA_Dir == DMA_MEM_TO_PERIPH)
+	{
+		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SM0AR = (uint32_t)pSrcAddr;
+		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SPAR = (uint32_t)pDestArrd;
+	}
+	else
+	{
+		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SPAR = (uint32_t)pSrcAddr;
+		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SM0AR = (uint32_t)pDestArrd;
+	}
+
+	// 2. Set number of data items to transfer
+	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SNDTR = (uint32_t)(dataLen & 0xFF);
+
+
+}
+
+
 
 

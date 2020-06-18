@@ -73,12 +73,12 @@
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.2083727653" name="MCU Output Converter Motorola S-rec with symbols" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec"/>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.835158550.1061689976" name="adc_read_IT.c" rcbsApplicability="disable" resourcePath="Src/adc_read_IT.c" toolsToInvoke="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1258005654.847046227">
-						<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1258005654.847046227" name="MCU GCC Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1258005654"/>
+					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.835158550.1492607378" name="adc_read_simple.c" rcbsApplicability="disable" resourcePath="Src/adc_read_simple.c" toolsToInvoke="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1258005654.933840780">
+						<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1258005654.933840780" name="MCU GCC Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.1258005654"/>
 					</fileInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Drivers"/>
-						<entry excluding="adc_read_IT.c|adc_read_to_usart.c|adc_read.c|sys_timer_led.c|led_button.c|usart_write_read_IT.c|usart_msgs_IT.c|i2c_master_read_cmd.c|irq_led_btn.c|led_toggle.c|i2c_slave_read_IT.c|i2c_master_read_cmd_IT.c|spi_arduino_cmd_IT.c|i2c_master_write.c|stm_arduino_cmd_IT.c|spi_arduino_cmd_handle.c|spi_arduino_rx.c|spi_comm.c|ext_led_btn.c|int_led_btn.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
+						<entry excluding="adc_read_simple.c|adc_read_IT.c|adc_read_to_usart.c|adc_read.c|sys_timer_led.c|led_button.c|usart_write_read_IT.c|usart_msgs_IT.c|i2c_master_read_cmd.c|irq_led_btn.c|led_toggle.c|i2c_slave_read_IT.c|i2c_master_read_cmd_IT.c|spi_arduino_cmd_IT.c|i2c_master_write.c|stm_arduino_cmd_IT.c|spi_arduino_cmd_handle.c|spi_arduino_rx.c|spi_comm.c|ext_led_btn.c|int_led_btn.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Startup"/>
 					</sourceEntries>
 				</configuration>

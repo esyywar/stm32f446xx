@@ -63,7 +63,6 @@ void DMA_DeInit(DMA_RegDef_t *pDMAx);
  */
 void DMA_Start(DMA_Handle_t *pDMAxHandle, uint32_t *pSrcAddr, uint32_t *pDestArrd, uint16_t dataLen);
 
-
 /*
  * DMA Interrupt Configuration
  */
@@ -71,9 +70,20 @@ void DMA_IRQConfig(uint8_t IRQNumber, uint8_t EnOrDi);
 void DMA_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
 
 /*
+ * Interrupt enabled DMA transfer
+ */
+void DMA_Start_IT(DMA_Handle_t *pDMAxHandle, uint32_t *pSrcAddr, uint32_t *pDestArrd, uint16_t dataLen);
+
+
+/*
  * Read flag status from the SR
  */
 uint8_t DMA_GetFlagStatus(DMA_Handle_t *pDMAxHandle, uint8_t DMA_FLAG);
+
+/*
+ * Application callback used to notify of interrupt events and errors
+ */
+__weak void DMA_ApplicationCallbackEvent(DMA_Handle_t *pDMAxHandle, uint8_t event);
 
 
 /************************* CONFIGURATION VALUES *****************************/
@@ -172,6 +182,11 @@ uint8_t DMA_GetFlagStatus(DMA_Handle_t *pDMAxHandle, uint8_t DMA_FLAG);
 #define DMA_FLAG_TEIF			2
 #define DMA_FLAG_HTIF			3
 #define DMA_FLAG_TCIF			4
+
+
+/******************* DMA CALLBACK EVENTS ********************/
+
+#define DMA_TRANSFER_CMPLT			0
 
 
 #endif /* INC_STM32F446XX_DMA_DRIVER_H_ */

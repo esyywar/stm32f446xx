@@ -6,7 +6,7 @@
 "Drivers/Src/stm32f446xx_spi_driver.o"
 "Drivers/Src/stm32f446xx_systck_driver.o"
 "Drivers/Src/stm32f446xx_usart_driver.o"
-"Src/adc_read_simple.o"
+"Src/adc_dma_read.o"
 "Src/syscalls.o"
 "Src/sysmem.o"
 "Startup/startup_stm32f446retx.o"

@@ -18,6 +18,8 @@ typedef struct {
 	uint8_t ADC_PreSc;
 	uint8_t ADC_Trig_Pol;
 	uint8_t ADC_Trig_Src;
+	uint8_t ADC_DMA_En;
+	uint8_t ADC_DMA_Cont;
 } ADC_Config_t;
 
 /*
@@ -79,7 +81,6 @@ void ADC_Scan_Reg_IT();
  * For exiting continuous interrupt ADC read mode
  */
 void ADC_Cont_Close(ADC_Handle_t *pADCxHandle);
-
 
 /*
  * Read flag status from the SR
@@ -198,6 +199,20 @@ __weak void ADC_ApplicationCallbackEvent(ADC_Handle_t *pADCxHandle, uint8_t even
 #define ADC_JEXT_TIM8_CH3		13
 #define ADC_JEXT_TIM8_CH4		14
 #define ADC_JEXT_EXTI_15		15
+
+
+/*
+ * DMA transfer
+ */
+#define ADC_DMA_TRANS_DI		0
+#define ADC_DMA_TRANS_EN		1
+
+
+/*
+ * DMA continuous signalling
+ */
+#define ADC_DMA_CONT_DI			0
+#define ADC_DMA_CONT_EN			1
 
 
 /*

@@ -149,7 +149,7 @@ uint16_t ADC_Read_Reg(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_S
 	// 2. Disable scan mode
 	pADCxHandle->pADCx->CR1 &= ~(1 << 8);
 
-	// 3. Can take only single reading without non-blocking interrupt
+	// 3. Disable continuous mode
 	pADCxHandle->pADCx->CR2 &= ~(1 << 1);
 
 	// 4. Set number of channels in sequence to 1
@@ -340,6 +340,10 @@ uint8_t ADC_Read_Reg_IT(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC
 		// 7. Enable end of conversion interrupt
 		pADCxHandle->pADCx->CR1 |= (1 << 5);
 		ADC_IRQConfig(IRQ_POS_ADC, ENABLE);
+
+		// 8. Set DMA transfer if requested
+		pADCxHandle->pADCx->CR2 |= (pADCxHandle->ADC_Config.ADC_DMA_En << 8);
+		pADCxHandle->pADCx->CR2 |= (pADCxHandle->ADC_Config.ADC_DMA_Cont << 9);
 
 		// 8. Either set trigger or begin conversion
 		if (pADCxHandle->ADC_Config.ADC_Trig_Pol == ADC_EXTEN_DI)
