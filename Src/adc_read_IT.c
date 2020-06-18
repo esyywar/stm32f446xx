@@ -87,6 +87,7 @@ void ADC1_In_Init() {
 
 	Adc_Input.ADC_Config.ADC_Res = ADC_RES_12BIT;
 	Adc_Input.ADC_Config.ADC_PreSc = ADC_PCLK_DIV2;
+	Adc_Input.ADC_Config.ADC_Mode = ADC_CONT_READ;
 
 	ADC_Init(&Adc_Input);
 }
@@ -111,7 +112,7 @@ int main(void) {
 	Adc_Input.pDataBuffer = &value;
 
 	/* Begin continuous read from ADC */
-	while(ADC_Read_Reg_IT(&Adc_Input, ADC_IN0, ADC_SMP_3CYC, ADC_CONT_READ) != ADC_READY);
+	while(ADC_Read_Reg_IT(&Adc_Input, ADC_IN0, ADC_SMP_3CYC) != ADC_READY);
 
 
 	while(1) {

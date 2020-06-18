@@ -19,6 +19,11 @@ ADC_Handle_t Adc_Input;
 /* Handle for USART2 transmitter to PC */
 USART_Handle_t Usart_Handle;
 
+/* Handle for DMA2 */
+DMA_Handle_t Dma_adcHandle;
+
+/* Variable for DMA to transfer to */
+uint16_t data = 0;
 
 
 /* Initialize the GPIO Pin for ADC input */
@@ -86,14 +91,14 @@ void ADC1_In_Init() {
 
 	Adc_Input.ADC_Config.ADC_Res = ADC_RES_12BIT;
 	Adc_Input.ADC_Config.ADC_PreSc = ADC_PCLK_DIV2;
+	Adc_Input.ADC_Config.ADC_DMA_En = ADC_DMA_EN;
+	Adc_Input.ADC_Config.ADC_DMA_Cont = ADC_DMA_CONT_EN;
 
 	ADC_Init(&Adc_Input);
 }
 
 /* Initialize DMA2 stream 0 to channel 0 for ADC1 */
 void DMA2_Init() {
-	DMA_Handle_t Dma_adcHandle;
-
 	Dma_adcHandle.pDMAx = DMA2;
 	Dma_adcHandle.DMA_Stream = DMA_STREAM_0;
 
@@ -105,6 +110,10 @@ void DMA2_Init() {
 	Dma_adcHandle.DMA_Config.DMA_FIFOMode = DMA_DIRECT_EN;
 
 	DMA_Init(&Dma_adcHandle);
+}
+
+void DMA2_Stream0_IRQHandler() {
+	DMA_EV_IRQHandling(&Dma_adcHandle);
 }
 
 
@@ -122,20 +131,26 @@ int main(void) {
 	/* Initialize DMA to transfer from ADC DR to data variable */
 	DMA2_Init();
 
-	/* Variable for DMA to transfer to */
-	uint16_t data = 0;
-
 	while(1) {
+		/* Set interrupt ready */
+		while(DMA_Start_IT(&Dma_adcHandle, (uint32_t*)ADC1->DR, (uint32_t*)&data, (uint16_t)1) != DMA_READY);
+
 		/* Read data */
 		ADC_Read_Reg(&Adc_Input, ADC_IN0, ADC_SMP_3CYC);
+	}
 
+	return 0;
+}
+
+/* When DMA returns complete, output ADC result on USART2 */
+void DMA_ApplicationCallbackEvent(DMA_Handle_t *pDMAxHandle, uint8_t event) {
+	if (event == DMA_TRANSFER_CMPLT)
+	{
 		/* Output to USART2 */
 		char output[50];
 		sprintf(output, "ADC output is: [%i]\r\n", data);
 		USART_Write(&Usart_Handle, (uint8_t*)output, strlen(output));
 	}
-
-	return 0;
 }
 
 

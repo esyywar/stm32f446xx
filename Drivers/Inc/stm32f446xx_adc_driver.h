@@ -16,6 +16,7 @@
 typedef struct {
 	uint8_t ADC_Res;
 	uint8_t ADC_PreSc;
+	uint8_t ADC_Mode;
 	uint8_t ADC_Trig_Pol;
 	uint8_t ADC_Trig_Src;
 	uint8_t ADC_DMA_En;
@@ -30,7 +31,6 @@ typedef struct {
 	ADC_Config_t ADC_Config;
 	uint16_t *pDataBuffer;
 	uint8_t state;
-	uint8_t isContMode;
 	uint8_t dataLen;
 } ADC_Handle_t;
 
@@ -74,7 +74,7 @@ void ADC_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
 /*
  * Interrupt enabled ADC read
  */
-uint8_t ADC_Read_Reg_IT(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_SMP_CYC, uint8_t ADC_DAQ_MODE);
+uint8_t ADC_Read_Reg_IT(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_SMP_CYC);
 void ADC_Scan_Reg_IT();
 
 /*
@@ -204,12 +204,12 @@ __weak void ADC_ApplicationCallbackEvent(ADC_Handle_t *pADCxHandle, uint8_t even
 /*
  * DMA transfer
  */
-#define ADC_DMA_TRANS_DI		0
-#define ADC_DMA_TRANS_EN		1
+#define ADC_DMA_DI		0
+#define ADC_DMA_EN		1
 
 
 /*
- * DMA continuous signalling
+ * DMA continuous signaling
  */
 #define ADC_DMA_CONT_DI			0
 #define ADC_DMA_CONT_EN			1
@@ -227,13 +227,6 @@ __weak void ADC_ApplicationCallbackEvent(ADC_Handle_t *pADCxHandle, uint8_t even
  */
 #define ADC_READY				0
 #define ADC_BUSY_READ			1
-
-/*
- * Continuous mode
- */
-#define ADC_SINGLE_MODE			0
-#define ADC_CONT_MODE			1
-
 
 
 /******************* STATUS REGISTER FLAGS *****************/

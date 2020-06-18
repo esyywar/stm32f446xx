@@ -19,7 +19,7 @@ typedef struct {
 	uint8_t DMA_MemInc;
 	uint8_t DMA_PeriphDataSize;
 	uint8_t DMA_MemDataSize;
-	uint8_t DMA_CircMode;
+	uint8_t DMA_Mode;
 	uint8_t DMA_Priority;
 	uint8_t DMA_FIFOMode;
 	uint8_t DMA_FIFOThresh;
@@ -34,6 +34,7 @@ typedef struct {
 	DMA_RegDef_t *pDMAx;
 	DMA_Config_t DMA_Config;
 	uint8_t DMA_Stream;
+	uint8_t state;
 } DMA_Handle_t;
 
 
@@ -72,13 +73,19 @@ void DMA_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
 /*
  * Interrupt enabled DMA transfer
  */
-void DMA_Start_IT(DMA_Handle_t *pDMAxHandle, uint32_t *pSrcAddr, uint32_t *pDestArrd, uint16_t dataLen);
+uint8_t DMA_Start_IT(DMA_Handle_t *pDMAxHandle, uint32_t *pSrcAddr, uint32_t *pDestArrd, uint16_t dataLen);
 
+void DMA_Close_IT(DMA_Handle_t *pDMAxHandle);
 
 /*
  * Read flag status from the SR
  */
 uint8_t DMA_GetFlagStatus(DMA_Handle_t *pDMAxHandle, uint8_t DMA_FLAG);
+
+/*
+ * Event and error interrupt handler
+ */
+void DMA_EV_IRQHandling(DMA_Handle_t *pDMAxHandle);
 
 /*
  * Application callback used to notify of interrupt events and errors
@@ -129,8 +136,9 @@ __weak void DMA_ApplicationCallbackEvent(DMA_Handle_t *pDMAxHandle, uint8_t even
 /*
  * Circular mode
  */
-#define DMA_CIRC_DI					0
-#define DMA_CIRC_EN					1
+#define DMA_MODE_NORMAL				0
+#define DMA_MODE_CIRC				1
+#define DMA_MODE_PFCCTRL			2
 
 /*
  * Stream priority level
@@ -146,6 +154,7 @@ __weak void DMA_ApplicationCallbackEvent(DMA_Handle_t *pDMAxHandle, uint8_t even
 #define DMA_DIRECT_EN				0
 #define DMA_DIRECT_DI				1
 
+
 /*
  * FIFO threshold
  */
@@ -154,6 +163,7 @@ __weak void DMA_ApplicationCallbackEvent(DMA_Handle_t *pDMAxHandle, uint8_t even
 #define DMA_FIFO_THRESH_3DIV4		2
 #define DMA_FIFO_THRESH_FULL		3
 
+
 /*
  * Burst for memory and peripheral
  */
@@ -161,6 +171,7 @@ __weak void DMA_ApplicationCallbackEvent(DMA_Handle_t *pDMAxHandle, uint8_t even
 #define DMA_BURST_INCR4				1
 #define DMA_BURST_INCR8				2
 #define DMA_BURST_INCR16			3
+
 
 /*
  * DMA Stream
@@ -175,13 +186,20 @@ __weak void DMA_ApplicationCallbackEvent(DMA_Handle_t *pDMAxHandle, uint8_t even
 #define DMA_STREAM_7				7
 
 
+/*
+ * Interrupt states
+ */
+#define DMA_READY					0
+#define DMA_BUSY					1
+
+
 /******************* STATUS REGISTER FLAGS *****************/
 
-#define DMA_FLAG_FEIF			0
-#define DMA_FLAG_DMEIF			1
-#define DMA_FLAG_TEIF			2
-#define DMA_FLAG_HTIF			3
-#define DMA_FLAG_TCIF			4
+#define DMA_FLAG_FEIF				0
+#define DMA_FLAG_DMEIF				1
+#define DMA_FLAG_TEIF				2
+#define DMA_FLAG_HTIF				3
+#define DMA_FLAG_TCIF				4
 
 
 /******************* DMA CALLBACK EVENTS ********************/

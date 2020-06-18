@@ -21,7 +21,7 @@ uint8_t TCIF_Flag[4] = {5, 11, 21, 27};
 /****************************** LOCAL FUNCTIONS *******************************/
 
 static void DMA_StartStop(DMA_Handle_t *pDMAxHandle, uint8_t EnOrDi);
-
+static void DMA_Stream_IRQ_Enable(DMA_Handle_t *pDMAxHandle);
 
 
 /*************************************************** DRIVER API IMPLMENTATION ***********************************************/
@@ -129,8 +129,15 @@ void DMA_Init(DMA_Handle_t *pDMAxHandle)
 	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (pDMAxHandle->DMA_Config.DMA_PeriphDataSize << 11);
 	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (pDMAxHandle->DMA_Config.DMA_MemDataSize << 13);
 
-	// 11. Circle mode
-	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (pDMAxHandle->DMA_Config.DMA_CircMode << 8);
+	// 11. Set  normal, circle or peripheral control mode
+	if (pDMAxHandle->DMA_Config.DMA_Mode == DMA_MODE_PFCCTRL)
+	{
+		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (1 << 5);
+	}
+	else if (pDMAxHandle->DMA_Config.DMA_Mode == DMA_MODE_CIRC)
+	{
+		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (1 << 8);
+	}
 }
 
 
@@ -200,7 +207,17 @@ uint8_t DMA_GetFlagStatus(DMA_Handle_t *pDMAxHandle, uint8_t DMA_FLAG)
 }
 
 
-
+/*
+ * Function:	DMA_Start
+ *
+ * Brief: 		Blocking function to start DMA transfer.
+ *
+ * Params: 		DMA_Handle_t *pDMAxHandle - DMA handle address
+ * 				uint32_t *pSrcAddr - source address
+ * 				uint32_t *pDestArrd - destination address
+ * 				uint16_t dataLen - length of data to transfer
+ *
+ */
 void DMA_Start(DMA_Handle_t *pDMAxHandle, uint32_t *pSrcAddr, uint32_t *pDestArrd, uint16_t dataLen)
 {
 	uint8_t streamNum = pDMAxHandle->DMA_Stream;
@@ -270,28 +287,177 @@ void DMA_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority)
 }
 
 
-void DMA_Start_IT(DMA_Handle_t *pDMAxHandle, uint32_t *pSrcAddr, uint32_t *pDestArrd, uint16_t dataLen)
+/*
+ * Function:	DMA_EV_IRQHandling
+ *
+ * Brief: 		Handle interrupt events from DMAs
+ *
+ * Params: 		struct DMA_Handle_t *pDMAxHandle - DMA handle address
+ *
+ */
+void DMA_EV_IRQHandling(DMA_Handle_t *pDMAxHandle)
 {
-	uint8_t streamNum = pDMAxHandle->DMA_Stream;
-
-	// 1. Set the source and destination address depending on direction
-	if (pDMAxHandle->DMA_Config.DMA_Dir == DMA_MEM_TO_PERIPH)
+	// Is transfer complete interrupt?
+	if (DMA_GetFlagStatus(pDMAxHandle, DMA_FLAG_TCIF))
 	{
-		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SM0AR = (uint32_t)pSrcAddr;
-		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SPAR = (uint32_t)pDestArrd;
+		// If not in circular mode, set as ready
+		if (pDMAxHandle->DMA_Config.DMA_Mode != DMA_MODE_CIRC)
+		{
+			DMA_Close_IT(pDMAxHandle);
+		}
 	}
-	else
-	{
-		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SPAR = (uint32_t)pSrcAddr;
-		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SM0AR = (uint32_t)pDestArrd;
-	}
-
-	// 2. Set number of data items to transfer
-	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SNDTR = (uint32_t)(dataLen & 0xFF);
-
-
 }
 
+
+/*
+ * Function:	DMA_Stream_IRQ_Enable
+ *
+ * Brief: 		Set the required IRQ interrupt in NVIC for the DMA register and stream number
+ *
+ * Params: 		DMA_Handle_t *pDMAxHandle - DMA handle address
+ *
+ */
+static void DMA_Stream_IRQ_Enable(DMA_Handle_t *pDMAxHandle)
+{
+	if (pDMAxHandle->pDMAx == DMA1)
+	{
+		switch (pDMAxHandle->DMA_Stream)
+		{
+			case (DMA_STREAM_0):
+			{
+				DMA_IRQConfig(IRQ_DMA1_STREAM0, ENABLE);
+			} break;
+			case (DMA_STREAM_1):
+			{
+				DMA_IRQConfig(IRQ_DMA1_STREAM1, ENABLE);
+			} break;
+			case (DMA_STREAM_2):
+			{
+				DMA_IRQConfig(IRQ_DMA1_STREAM2, ENABLE);
+			} break;
+			case (DMA_STREAM_3):
+			{
+				DMA_IRQConfig(IRQ_DMA1_STREAM3, ENABLE);
+			} break;
+			case (DMA_STREAM_4):
+			{
+				DMA_IRQConfig(IRQ_DMA1_STREAM4, ENABLE);
+			} break;
+			case (DMA_STREAM_5):
+			{
+				DMA_IRQConfig(IRQ_DMA1_STREAM5, ENABLE);
+			} break;
+			case (DMA_STREAM_6):
+			{
+				DMA_IRQConfig(IRQ_DMA1_STREAM6, ENABLE);
+			} break;
+			case (DMA_STREAM_7):
+			{
+				DMA_IRQConfig(IRQ_DMA1_STREAM7, ENABLE);
+			}
+		}
+	}
+	else if (pDMAxHandle->pDMAx == DMA2)
+	{
+		switch (pDMAxHandle->DMA_Stream)
+		{
+			case (DMA_STREAM_0):
+			{
+				DMA_IRQConfig(IRQ_DMA2_STREAM0, ENABLE);
+			} break;
+			case (DMA_STREAM_1):
+			{
+				DMA_IRQConfig(IRQ_DMA2_STREAM1, ENABLE);
+			} break;
+			case (DMA_STREAM_2):
+			{
+				DMA_IRQConfig(IRQ_DMA2_STREAM2, ENABLE);
+			} break;
+			case (DMA_STREAM_3):
+			{
+				DMA_IRQConfig(IRQ_DMA2_STREAM3, ENABLE);
+			} break;
+			case (DMA_STREAM_4):
+			{
+				DMA_IRQConfig(IRQ_DMA2_STREAM4, ENABLE);
+			} break;
+			case (DMA_STREAM_5):
+			{
+				DMA_IRQConfig(IRQ_DMA2_STREAM5, ENABLE);
+			} break;
+			case (DMA_STREAM_6):
+			{
+				DMA_IRQConfig(IRQ_DMA2_STREAM6, ENABLE);
+			} break;
+			case (DMA_STREAM_7):
+			{
+				DMA_IRQConfig(IRQ_DMA2_STREAM7, ENABLE);
+			}
+		}
+	}
+}
+
+
+/*
+ * Function:	DMA_Start_IT
+ *
+ * Brief: 		Enable DMA transfer with interrupts.
+ *
+ * Params: 		DMA_Handle_t *pDMAxHandle - DMA handle address
+ * 				uint32_t *pSrcAddr - source address
+ * 				uint32_t *pDestArrd - destination address
+ * 				uint16_t dataLen - length of data to transfer
+ *
+ */
+uint8_t DMA_Start_IT(DMA_Handle_t *pDMAxHandle, uint32_t *pSrcAddr, uint32_t *pDestArrd, uint16_t dataLen)
+{
+	uint8_t state = pDMAxHandle->state;
+
+	if (state == DMA_READY)
+	{
+		pDMAxHandle->state = DMA_BUSY;
+
+		uint8_t streamNum = pDMAxHandle->DMA_Stream;
+
+		// 1. Set the source and destination address depending on direction
+		if (pDMAxHandle->DMA_Config.DMA_Dir == DMA_MEM_TO_PERIPH)
+		{
+			pDMAxHandle->pDMAx->DMA_Strm[streamNum].SM0AR = (uint32_t)pSrcAddr;
+			pDMAxHandle->pDMAx->DMA_Strm[streamNum].SPAR = (uint32_t)pDestArrd;
+		}
+		else
+		{
+			pDMAxHandle->pDMAx->DMA_Strm[streamNum].SPAR = (uint32_t)pSrcAddr;
+			pDMAxHandle->pDMAx->DMA_Strm[streamNum].SM0AR = (uint32_t)pDestArrd;
+		}
+
+		// 2. Set number of data items to transfer
+		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SNDTR = (uint32_t)(dataLen & 0xFF);
+
+		// 3. Set transfer complete interrupt
+		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (1 << 4);
+		DMA_Stream_IRQ_Enable(pDMAxHandle);
+
+		// 4. Start the transfer
+		DMA_StartStop(pDMAxHandle, ENABLE);
+	}
+
+	return state;
+}
+
+
+void DMA_Close_IT(DMA_Handle_t *pDMAxHandle) {
+	uint8_t streamNum = pDMAxHandle->DMA_Stream;
+
+	// 1. Reset transfer complete interrupt
+	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR &= ~(1 << 4);
+
+	// 2. Reset handle fields
+	pDMAxHandle->state = DMA_READY;
+
+	// 3. Send callback
+	DMA_ApplicationCallbackEvent(pDMAxHandle, DMA_TRANSFER_CMPLT);
+}
 
 
 

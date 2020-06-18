@@ -100,6 +100,16 @@ void ADC_Init(ADC_Handle_t *pADCxHandle)
 
 	// 3. Set ADC resolution
 	pADCxHandle->pADCx->CR1 |= (uint32_t)(pADCxHandle->ADC_Config.ADC_Res << 24);
+
+	// 4. Continuous or single read mode
+	if (pADCxHandle->ADC_Config.ADC_Mode == ADC_SINGLE_READ)
+	{
+		pADCxHandle->pADCx->CR2 &= ~(1 << 1);
+	}
+	else if (pADCxHandle->ADC_Config.ADC_Mode == ADC_CONT_READ)
+	{
+		pADCxHandle->pADCx->CR2 |= (1 << 1);
+	}
 }
 
 
@@ -302,7 +312,7 @@ void ADC_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority)
  * 				uint8_t ADC_DAQ_MODE - Take single reading or continuous mode
  *
  */
-uint8_t ADC_Read_Reg_IT(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_SMP_CYC, uint8_t ADC_DAQ_MODE)
+uint8_t ADC_Read_Reg_IT(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC_SMP_CYC)
 {
 	uint8_t state = pADCxHandle->state;
 
@@ -316,32 +326,21 @@ uint8_t ADC_Read_Reg_IT(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC
 		// 2. Disable scan mode
 		pADCxHandle->pADCx->CR1 &= ~(1 << 8);
 
-		// 3. Continuous or single read mode
-		if (ADC_DAQ_MODE == ADC_SINGLE_READ)
-		{
-			pADCxHandle->pADCx->CR2 &= ~(1 << 1);
-		}
-		else if (ADC_DAQ_MODE == ADC_CONT_READ)
-		{
-			pADCxHandle->isContMode = ADC_CONT_MODE;
-			pADCxHandle->pADCx->CR2 |= (1 << 1);
-		}
-
-		// 4. Set number of channels in sequence to 1
+		// 3. Set number of channels in sequence to 1
 		pADCxHandle->pADCx->SQR[0] &= ~(0xF << 20);
 
-		// 5. Load the channel to be read
+		// 4. Load the channel to be read
 		pADCxHandle->pADCx->SQR[2] = (ADC_CHAN << 0);
 
-		// 6. Number of sampling cycles
+		// 5. Number of sampling cycles
 		uint8_t temp1 = 1 - ADC_CHAN / 10, temp2 = ADC_CHAN % 9;
 		pADCxHandle->pADCx->SMPR[temp1] = (ADC_SMP_CYC << temp2);
 
-		// 7. Enable end of conversion interrupt
+		// 6. Enable end of conversion interrupt
 		pADCxHandle->pADCx->CR1 |= (1 << 5);
 		ADC_IRQConfig(IRQ_POS_ADC, ENABLE);
 
-		// 8. Set DMA transfer if requested
+		// 7. Set DMA transfer if requested
 		pADCxHandle->pADCx->CR2 |= (pADCxHandle->ADC_Config.ADC_DMA_En << 8);
 		pADCxHandle->pADCx->CR2 |= (pADCxHandle->ADC_Config.ADC_DMA_Cont << 9);
 
@@ -423,12 +422,12 @@ void ADC_Read_IT_Handle(ADC_Handle_t *pADCxHandle)
 	// Read value from DR into buffer
 	*(pADCxHandle->pDataBuffer) = pADCxHandle->pADCx->DR & 0xFFFF;
 
-	if (pADCxHandle->isContMode == ADC_CONT_MODE)
+	if (pADCxHandle->ADC_Config.ADC_Mode == ADC_CONT_READ)
 	{
 		// If in continuous mode, send callback on each read
 		ADC_ApplicationCallbackEvent(pADCxHandle, ADC_READ_CMPLT);
 	}
-	else if (pADCxHandle->isContMode == ADC_SINGLE_MODE)
+	else if (pADCxHandle->ADC_Config.ADC_Mode == ADC_SINGLE_READ)
 	{
 		// If not in continuous, adjust data buffers and length
 		(pADCxHandle->pDataBuffer)++;
