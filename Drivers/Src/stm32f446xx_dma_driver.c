@@ -22,6 +22,7 @@ uint8_t TCIF_Flag[4] = {5, 11, 21, 27};
 
 static void DMA_StartStop(DMA_Handle_t *pDMAxHandle, uint8_t EnOrDi);
 static void DMA_Stream_IRQ_Enable(DMA_Handle_t *pDMAxHandle);
+static void DMA_Trans_Cmplt_Handle_IT(DMA_Handle_t *pDMAxHandle);
 
 
 /*************************************************** DRIVER API IMPLMENTATION ***********************************************/
@@ -88,48 +89,51 @@ static void DMA_StartStop(DMA_Handle_t *pDMAxHandle, uint8_t EnOrDi)
  */
 void DMA_Init(DMA_Handle_t *pDMAxHandle)
 {
+	// 1. Turn on peripheral clock
+	DMA_PeriClockControl(pDMAxHandle->pDMAx, ENABLE);
+
 	uint8_t streamNum = pDMAxHandle->DMA_Stream;
 
-	// 1. Set the channel number
+	// 2. Set the channel number
 	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (pDMAxHandle->DMA_Config.DMA_Channel << 25);
 
-	// 2. Stream priority
+	// 3. Stream priority
 	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (pDMAxHandle->DMA_Config.DMA_Priority << 16);
 
-	// 3. FIFO mode (direct mode)
+	// 4. FIFO mode (direct mode)
 	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SFCR |= (pDMAxHandle->DMA_Config.DMA_FIFOMode << 2);
 
-	// 4. FIFO threshold
+	// 5. FIFO threshold
 	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SFCR &= ~(0x3 << 0);
 	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SFCR |= (pDMAxHandle->DMA_Config.DMA_FIFOThresh << 0);
 
-	// 5. Set transfer direction
+	// 6. Set transfer direction
 	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (pDMAxHandle->DMA_Config.DMA_Dir << 6);
 
-	// 6. Peripheral increment
+	// 7. Peripheral increment
 	if (pDMAxHandle->DMA_Config.DMA_PeriphInc == DMA_PERIPH_INC)
 	{
 		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (1 << 9);
 		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR &= ~(1 << 15);
 	}
 
-	// 7. Memory increment
+	// 8. Memory increment
 	if (pDMAxHandle->DMA_Config.DMA_MemInc == DMA_MEM_INC)
 	{
 		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (1 << 10);
 	}
 
-	// 8. Peripheral burst
+	// 9. Peripheral burst
 	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (pDMAxHandle->DMA_Config.DMA_PBurst << 21);
 
-	// 9. Memory burst
+	// 10. Memory burst
 	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (pDMAxHandle->DMA_Config.DMA_MBurst << 23);
 
-	// 10. Set peripheral and memory data sizes
+	// 11. Set peripheral and memory data sizes
 	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (pDMAxHandle->DMA_Config.DMA_PeriphDataSize << 11);
 	pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (pDMAxHandle->DMA_Config.DMA_MemDataSize << 13);
 
-	// 11. Set  normal, circle or peripheral control mode
+	// 12. Set  normal, circle or peripheral control mode
 	if (pDMAxHandle->DMA_Config.DMA_Mode == DMA_MODE_PFCCTRL)
 	{
 		pDMAxHandle->pDMAx->DMA_Strm[streamNum].SCR |= (1 << 5);
@@ -300,11 +304,7 @@ void DMA_EV_IRQHandling(DMA_Handle_t *pDMAxHandle)
 	// Is transfer complete interrupt?
 	if (DMA_GetFlagStatus(pDMAxHandle, DMA_FLAG_TCIF))
 	{
-		// If not in circular mode, set as ready
-		if (pDMAxHandle->DMA_Config.DMA_Mode != DMA_MODE_CIRC)
-		{
-			DMA_Close_IT(pDMAxHandle);
-		}
+		DMA_Trans_Cmplt_Handle_IT(pDMAxHandle);
 	}
 }
 
@@ -446,6 +446,36 @@ uint8_t DMA_Start_IT(DMA_Handle_t *pDMAxHandle, uint32_t *pSrcAddr, uint32_t *pD
 }
 
 
+/*
+ * Function:	DMA_Trans_Cmplt_Handle_IT
+ *
+ * Brief: 		Handle transfer complete events from DMAs
+ *
+ * Params: 		struct DMA_Handle_t *pDMAxHandle - DMA handle address
+ *
+ */
+static void DMA_Trans_Cmplt_Handle_IT(DMA_Handle_t *pDMAxHandle)
+{
+	// 1. If not in circular mode and data to be transfered is 0, close transfer
+	if (pDMAxHandle->DMA_Config.DMA_Mode != DMA_MODE_CIRC && pDMAxHandle->pDMAx->DMA_Strm[pDMAxHandle->DMA_Stream].SNDTR == 0)
+	{
+		DMA_Close_IT(pDMAxHandle);
+	}
+	else
+	{
+		DMA_ApplicationCallbackEvent(pDMAxHandle, DMA_TRANSFER_CMPLT);
+	}
+}
+
+
+/*
+ * Function:	DMA_Close_IT
+ *
+ * Brief: 		Closes the DMA transfers and resets state
+ *
+ * Params: 		struct DMA_Handle_t *pDMAxHandle - DMA handle address
+ *
+ */
 void DMA_Close_IT(DMA_Handle_t *pDMAxHandle) {
 	uint8_t streamNum = pDMAxHandle->DMA_Stream;
 

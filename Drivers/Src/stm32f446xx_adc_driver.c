@@ -110,6 +110,16 @@ void ADC_Init(ADC_Handle_t *pADCxHandle)
 	{
 		pADCxHandle->pADCx->CR2 |= (1 << 1);
 	}
+
+	// 5. Set up DMA
+	if (pADCxHandle->ADC_Config.ADC_DMA_Ctrl == ADC_DMA_EN)
+	{
+		pADCxHandle->pADCx->CR2 |= (1 << 8);
+		if (pADCxHandle->ADC_Config.ADC_DDS_Ctrl == ADC_DDS_EN)
+		{
+			pADCxHandle->pADCx->CR2 |= (1 << 9);
+		}
+	}
 }
 
 
@@ -341,8 +351,8 @@ uint8_t ADC_Read_Reg_IT(ADC_Handle_t *pADCxHandle, uint8_t ADC_CHAN, uint8_t ADC
 		ADC_IRQConfig(IRQ_POS_ADC, ENABLE);
 
 		// 7. Set DMA transfer if requested
-		pADCxHandle->pADCx->CR2 |= (pADCxHandle->ADC_Config.ADC_DMA_En << 8);
-		pADCxHandle->pADCx->CR2 |= (pADCxHandle->ADC_Config.ADC_DMA_Cont << 9);
+		pADCxHandle->pADCx->CR2 |= (pADCxHandle->ADC_Config.ADC_DMA_Ctrl << 8);
+		pADCxHandle->pADCx->CR2 |= (pADCxHandle->ADC_Config.ADC_DDS_Ctrl << 9);
 
 		// 8. Either set trigger or begin conversion
 		if (pADCxHandle->ADC_Config.ADC_Trig_Pol == ADC_EXTEN_DI)
@@ -389,19 +399,7 @@ void ADC_EV_IRQHandling(ADC_Handle_t *pADCxHandle)
 		pADCxHandle->pADCx->SR &= ~(1 << 3);
 	}
 
-	// 4. Is injected channel start interrupt?
-	if (ADC_GetFlagStatus(pADCxHandle->pADCx, ADC_FLAG_JSTRT))
-	{
-		pADCxHandle->pADCx->SR &= ~(1 << 2);
-	}
-
-	// 5. Is regular channel start interrupt?
-	if (ADC_GetFlagStatus(pADCxHandle->pADCx, ADC_FLAG_STRT))
-	{
-		pADCxHandle->pADCx->SR &= ~(1 << 1);
-	}
-
-	// 5. Is overrun interrupt?
+	// 4. Is overrun interrupt?
 	if (ADC_GetFlagStatus(pADCxHandle->pADCx, ADC_FLAG_OVR))
 	{
 		pADCxHandle->pADCx->SR &= ~(1 << 0);

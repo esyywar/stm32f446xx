@@ -19,8 +19,8 @@ typedef struct {
 	uint8_t ADC_Mode;
 	uint8_t ADC_Trig_Pol;
 	uint8_t ADC_Trig_Src;
-	uint8_t ADC_DMA_En;
-	uint8_t ADC_DMA_Cont;
+	uint8_t ADC_DMA_Ctrl;
+	uint8_t ADC_DDS_Ctrl;
 } ADC_Config_t;
 
 /*
@@ -204,15 +204,15 @@ __weak void ADC_ApplicationCallbackEvent(ADC_Handle_t *pADCxHandle, uint8_t even
 /*
  * DMA transfer
  */
-#define ADC_DMA_DI		0
-#define ADC_DMA_EN		1
+#define ADC_DMA_DI			0
+#define ADC_DMA_EN			1
 
 
 /*
- * DMA continuous signaling
+ * DMA disable selection
  */
-#define ADC_DMA_CONT_DI			0
-#define ADC_DMA_CONT_EN			1
+#define ADC_DDS_DI			0
+#define ADC_DDS_EN			1
 
 
 /*

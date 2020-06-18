@@ -244,7 +244,7 @@ typedef struct {
 	__vo uint32_t HISR;						/* DMA high interrupt status register - OFFSET 0x04 */
 	__vo uint32_t LIFCR;					/* DMA low interrupt flag clear register - OFFSET 0x08 */
 	__vo uint32_t HIFCR;					/* DMA high interrupt flag clear register - OFFSET 0x0C */
-	__vo DMA_Strm_RegDef_t DMA_Strm[8];		/* DMA stream registers (8 streams for each DMA) - OFFSET 0x10 */
+	__vo DMA_Strm_RegDef_t   DMA_Strm[8];		/* DMA stream registers (8 streams for each DMA) - OFFSET 0x10 */
 } DMA_RegDef_t;
 
 

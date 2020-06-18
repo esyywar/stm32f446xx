@@ -1,5 +1,5 @@
 /*
- * adc_dma_read.c
+ * adc_dma_read_IT.c
  *
  *  Created on: Jun. 17, 2020
  *      Author: Rahul
@@ -91,8 +91,9 @@ void ADC1_In_Init() {
 
 	Adc_Input.ADC_Config.ADC_Res = ADC_RES_12BIT;
 	Adc_Input.ADC_Config.ADC_PreSc = ADC_PCLK_DIV2;
-	Adc_Input.ADC_Config.ADC_DMA_En = ADC_DMA_EN;
-	Adc_Input.ADC_Config.ADC_DMA_Cont = ADC_DMA_CONT_EN;
+	Adc_Input.ADC_Config.ADC_Mode = ADC_CONT_READ;
+	Adc_Input.ADC_Config.ADC_DMA_Ctrl = ADC_DMA_EN;
+	Adc_Input.ADC_Config.ADC_DDS_Ctrl = ADC_DDS_EN;
 
 	ADC_Init(&Adc_Input);
 }
@@ -103,15 +104,31 @@ void DMA2_Init() {
 	Dma_adcHandle.DMA_Stream = DMA_STREAM_0;
 
 	Dma_adcHandle.DMA_Config.DMA_Channel = DMA_CHANNEL_0;
+	Dma_adcHandle.DMA_Config.DMA_Priority = DMA_PRIOR_HIGH;
 	Dma_adcHandle.DMA_Config.DMA_Dir = DMA_PERIPH_TO_MEM;
 	Dma_adcHandle.DMA_Config.DMA_PeriphInc = DMA_PERIPH_NO_INC;
+	Dma_adcHandle.DMA_Config.DMA_MemInc = DMA_MEM_NO_INC;
 	Dma_adcHandle.DMA_Config.DMA_MemDataSize = DMA_DATASIZE_HALFWORD;
 	Dma_adcHandle.DMA_Config.DMA_PeriphDataSize = DMA_DATASIZE_HALFWORD;
+	Dma_adcHandle.DMA_Config.DMA_Mode = DMA_MODE_CIRC;
 	Dma_adcHandle.DMA_Config.DMA_FIFOMode = DMA_DIRECT_EN;
 
 	DMA_Init(&Dma_adcHandle);
 }
 
+void USART2_Output() {
+	/* Output to USART2 */
+	char output[50];
+	sprintf(output, "ADC output is: [%i]\r\n", data);
+	USART_Write(&Usart_Handle, (uint8_t*)output, strlen(output));
+}
+
+/* Call implemented ADC IRQ handler */
+void ADC_IRQHandler() {
+	ADC_EV_IRQHandling(&Adc_Input);
+}
+
+/* Call implemented DMA IRQ Handler */
 void DMA2_Stream0_IRQHandler() {
 	DMA_EV_IRQHandling(&Dma_adcHandle);
 }
@@ -131,12 +148,14 @@ int main(void) {
 	/* Initialize DMA to transfer from ADC DR to data variable */
 	DMA2_Init();
 
-	while(1) {
-		/* Set interrupt ready */
-		while(DMA_Start_IT(&Dma_adcHandle, (uint32_t*)ADC1->DR, (uint32_t*)&data, (uint16_t)1) != DMA_READY);
+	/* Set interrupt ready */
+	while(DMA_Start_IT(&Dma_adcHandle, (uint32_t*)&ADC1->DR, (uint32_t*)&data, (uint16_t)1) != DMA_READY);
 
-		/* Read data */
-		ADC_Read_Reg(&Adc_Input, ADC_IN0, ADC_SMP_3CYC);
+	/* Begin continuous read from ADC */
+	while(ADC_Read_Reg_IT(&Adc_Input, ADC_IN0, ADC_SMP_480CYC) != ADC_READY);
+
+	while(1) {
+
 	}
 
 	return 0;
@@ -146,13 +165,9 @@ int main(void) {
 void DMA_ApplicationCallbackEvent(DMA_Handle_t *pDMAxHandle, uint8_t event) {
 	if (event == DMA_TRANSFER_CMPLT)
 	{
-		/* Output to USART2 */
-		char output[50];
-		sprintf(output, "ADC output is: [%i]\r\n", data);
-		USART_Write(&Usart_Handle, (uint8_t*)output, strlen(output));
+		USART2_Output();
 	}
 }
-
 
 
 
